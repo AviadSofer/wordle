@@ -1,4 +1,8 @@
+import { useLettersNumber } from '~/contexts/LettersNumber';
+
 const ChooseWord: React.FC = () => {
+  const { lettersNumber, setLettersNumber } = useLettersNumber();
+
   return (
     <div className='flex flex-col justify-between'>
       <h2 className='pr-1 text-lg font-semibold'>שחקו במילים מוכנות</h2>
@@ -7,8 +11,9 @@ const ChooseWord: React.FC = () => {
           <div
             key={i}
             className={`flex h-10 w-10 cursor-pointer items-center justify-center rounded-md text-lg ${
-              i + 1 === 7 ? 'bg-green-500 text-white' : 'bg-blue-50 text-font'
+              i + 1 === lettersNumber ? 'bg-green-500 text-white' : 'bg-blue-50 text-font'
             }`}
+            onClick={() => setLettersNumber(i + 1)}
             aria-hidden='true'
           >
             {i + 1}
