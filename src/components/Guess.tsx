@@ -1,17 +1,21 @@
+import { useCurrentWord } from '~/contexts/CurrentWord';
+import { useTypedWord } from '~/contexts/TypedWord';
+
 const Guess: React.FC = () => {
-  const foo = 'fff';
+  const { currentWord } = useCurrentWord();
+  const { typedWord } = useTypedWord();
 
   return (
     <div
-      style={{ gridTemplateColumns: `repeat(${foo.length}, minmax(0, 1fr))` }}
-      className='grid gap-2'
+      style={{ gridTemplateColumns: `repeat(${currentWord.length}, minmax(0, 1fr))` }}
+      className='grid gap-x-1'
     >
-      {new Array(foo.length).fill(0).map((_, i) => (
+      {new Array(currentWord.length).fill(0).map((_, i) => (
         <div
           key={i}
-          className='flex h-14 w-14 items-center justify-center rounded-md border border-gray-400 font-bold'
+          className='flex h-12 w-12 items-center justify-center rounded-md border-2 border-gray-300 font-bold'
         >
-          {foo[i]}
+          {typedWord[i]}
         </div>
       ))}
     </div>

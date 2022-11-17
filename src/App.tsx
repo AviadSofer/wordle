@@ -1,9 +1,11 @@
+import GuessesGrid from './components/GuessesGrid';
 import Header from './components/Header';
 
 const App: React.FC = () => {
   return (
-    <div className='flex flex-col items-center gap-6'>
+    <div className='flex h-screen flex-col items-center justify-between gap-y-6 py-5'>
       <Header />
+      <GuessesGrid />
     </div>
   );
 };
