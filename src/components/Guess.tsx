@@ -26,10 +26,10 @@ const Guess: React.FC<Props> = ({ guess }) => {
         const bgColor = !isConfirmed
           ? 'bg-white'
           : guess[i] === currentWord[i]
-          ? 'bg-green-400'
+          ? 'bg-green-400 border-0'
           : currentWord.includes(guess[i])
-          ? 'bg-yellow-400'
-          : 'bg-gray-500 text-white';
+          ? 'bg-yellow-400 border-0'
+          : 'bg-gray-500 text-white border-0';
 
         return (
           <div

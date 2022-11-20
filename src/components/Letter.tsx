@@ -3,6 +3,7 @@ import { useGuesses } from '~/contexts/Guesses';
 import { FiDelete } from 'react-icons/fi';
 import { AiOutlineEnter } from 'react-icons/ai';
 import words from '~/static/words';
+import { useError } from '~/contexts/Error';
 
 interface Props {
   children: React.ReactNode;
@@ -11,6 +12,7 @@ interface Props {
 const Letter: React.FC<Props> = ({ children }) => {
   const { guesses, setGuesses } = useGuesses();
   const { currentWord } = useCurrentWord();
+  const { setIsError, setErrorMsg } = useError();
 
   const getFinelLetter = (letter: string) => {
     if (letter === 'כ') return 'ך';
@@ -26,14 +28,16 @@ const Letter: React.FC<Props> = ({ children }) => {
       if (i === guesses.findIndex((item) => item.length < currentWord.length + 2)) {
         // Just OK button
         if (children === 'OK' && guess.length < currentWord.length) {
-          console.log('אין מספיק אותיות!');
+          setIsError(true);
+          setErrorMsg('אין מספיק אותיות!');
 
           // OK button in the end
         } else if (children === 'OK' && guess.length === currentWord.length) {
           if (words.includes(guess)) {
             return `${guess}OK`;
           } else {
-            console.log('מילה לא תקנית!');
+            setIsError(true);
+            setErrorMsg('מילה לא תקנית!');
           }
 
           // Delete button
