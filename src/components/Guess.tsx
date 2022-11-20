@@ -10,12 +10,12 @@ const Guess: React.FC<Props> = ({ guess }) => {
   const [isConfirmed, setIsConfirmed] = useState(false);
 
   useEffect(() => {
-    if (guess.length === currentWord.length) {
+    if (guess.length === currentWord.length + 2) {
       setIsConfirmed(true);
     } else {
       setIsConfirmed(false);
     }
-  }, [currentWord, guess.length]);
+  }, [currentWord, guess]);
 
   return (
     <div
@@ -29,7 +29,7 @@ const Guess: React.FC<Props> = ({ guess }) => {
           ? 'bg-green-400'
           : currentWord.includes(guess[i])
           ? 'bg-yellow-400'
-          : 'bg-gray-700 text-white';
+          : 'bg-gray-500 text-white';
 
         return (
           <div

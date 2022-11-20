@@ -2,6 +2,7 @@ import { useCurrentWord } from '~/contexts/CurrentWord';
 import { useGuesses } from '~/contexts/Guesses';
 import { FiDelete } from 'react-icons/fi';
 import { AiOutlineEnter } from 'react-icons/ai';
+import words from '~/static/words';
 
 interface Props {
   children: React.ReactNode;
@@ -21,18 +22,38 @@ const Letter: React.FC<Props> = ({ children }) => {
   };
 
   const clickHandle = () => {
-    const newState = guesses.map((guess, i) => {
-      if (i === guesses.findIndex((item) => item.length < currentWord.length)) {
-        if (children === 'D') return guess.slice(0, -1);
-        if (guess.length === currentWord.length - 1) {
+    const newGuesses = guesses.map((guess, i) => {
+      if (i === guesses.findIndex((item) => item.length < currentWord.length + 2)) {
+        // Just OK button
+        if (children === 'OK' && guess.length < currentWord.length) {
+          console.log('אין מספיק אותיות!');
+
+          // OK button in the end
+        } else if (children === 'OK' && guess.length === currentWord.length) {
+          if (words.includes(guess)) {
+            return `${guess}OK`;
+          } else {
+            console.log('מילה לא תקנית!');
+          }
+
+          // Delete button
+        } else if (children === 'D') {
+          return guess.slice(0, -1);
+
+          // Make finel letters
+        } else if (guess.length === currentWord.length - 1 && children !== 'OK') {
           return `${guess}${getFinelLetter(`${children}`)}`;
+
+          // Rest of the cases
+        } else if (guess.length < currentWord.length && children !== 'OK') {
+          return `${guess}${children}`;
         }
-        if (guess.length < currentWord.length) return `${guess}${children}`;
       }
+
       return guess;
     });
 
-    setGuesses(newState);
+    setGuesses(newGuesses);
   };
 
   let key;
