@@ -1,5 +1,5 @@
 import { useCurrentWord } from '~/contexts/CurrentWord';
-import { useTypedWord } from '~/contexts/TypedWord';
+import { useGuesses } from '~/contexts/Guesses';
 import { FiDelete } from 'react-icons/fi';
 import { AiOutlineEnter } from 'react-icons/ai';
 
@@ -8,7 +8,7 @@ interface Props {
 }
 
 const Letter: React.FC<Props> = ({ children }) => {
-  const { typedWord, setTypedWord } = useTypedWord();
+  const { guesses, setGuesses } = useGuesses();
   const { currentWord } = useCurrentWord();
 
   const getFinelLetter = (letter: string) => {
@@ -21,15 +21,18 @@ const Letter: React.FC<Props> = ({ children }) => {
   };
 
   const clickHandle = () => {
-    if (children === 'D') {
-      setTypedWord(typedWord.slice(0, -1));
-    } else if (children === 'OK') {
-      setTypedWord(typedWord.slice(0, -1));
-    } else if (typedWord.length === currentWord.length - 1) {
-      setTypedWord(`${typedWord}${getFinelLetter(`${children}`)}`);
-    } else if (typedWord.length < currentWord.length) {
-      setTypedWord(`${typedWord}${children}`);
-    }
+    const newState = guesses.map((guess, i) => {
+      if (i === guesses.findIndex((item) => item.length < currentWord.length)) {
+        if (children === 'D') return guess.slice(0, -1);
+        if (guess.length === currentWord.length - 1) {
+          return `${guess}${getFinelLetter(`${children}`)}`;
+        }
+        if (guess.length < currentWord.length) return `${guess}${children}`;
+      }
+      return guess;
+    });
+
+    setGuesses(newState);
   };
 
   let key;

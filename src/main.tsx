@@ -5,7 +5,7 @@ import App from './App';
 
 import { CurrentWord } from './contexts/CurrentWord';
 import { LettersNumber } from './contexts/LettersNumber';
-import { TypedWord } from './contexts/TypedWord';
+import { Guesses } from './contexts/Guesses';
 
 // styles
 import './index.css';
@@ -14,9 +14,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <CurrentWord>
       <LettersNumber>
-        <TypedWord>
+        <Guesses>
           <App />
-        </TypedWord>
+        </Guesses>
       </LettersNumber>
     </CurrentWord>
   </React.StrictMode>,

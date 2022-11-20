@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useMemo, useState, useEffect } from 'react';
+import React, { createContext, useContext, useMemo, useState } from 'react';
 
 interface ProviderOptions {
   currentWord: string;
@@ -16,10 +16,6 @@ interface Props {
 // Create context component
 const CurrentWord: React.FC<Props> = ({ children }) => {
   const [currentWord, setCurrentWord] = useState('');
-
-  useEffect(() => {
-    setCurrentWord('שלום');
-  }, []);
 
   const value = useMemo(() => ({ currentWord, setCurrentWord }), [currentWord]);
 

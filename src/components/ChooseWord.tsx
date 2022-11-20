@@ -1,7 +1,12 @@
+import { useCurrentWord } from '~/contexts/CurrentWord';
+import { useGuesses } from '~/contexts/Guesses';
 import { useLettersNumber } from '~/contexts/LettersNumber';
+import words from '~/static/words';
 
 const ChooseWord: React.FC = () => {
   const { lettersNumber, setLettersNumber } = useLettersNumber();
+  const { setCurrentWord } = useCurrentWord();
+  const { setGuesses } = useGuesses();
 
   return (
     <div className='flex flex-col justify-between'>
@@ -11,12 +16,23 @@ const ChooseWord: React.FC = () => {
           <div
             key={i}
             className={`flex h-10 w-10 cursor-pointer items-center justify-center rounded-md text-lg ${
-              i + 1 === lettersNumber ? 'bg-green-500 text-white' : 'bg-blue-50 text-font'
+              i + 4 === lettersNumber ? 'bg-green-500 text-white' : 'bg-blue-50 text-font'
             }`}
-            onClick={() => setLettersNumber(i + 1)}
+            onClick={() => {
+              setLettersNumber(i + 4);
+
+              const wordByLenght = words.filter((word) => {
+                if (word.length === i + 4) return true;
+              });
+
+              const randomCurrentWord = wordByLenght[~~(Math.random() * wordByLenght.length)];
+
+              setCurrentWord(randomCurrentWord);
+              setGuesses(new Array(6).fill(''));
+            }}
             aria-hidden='true'
           >
-            {i + 1}
+            {i + 4}
           </div>
         ))}
       </div>
