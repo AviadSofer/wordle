@@ -23,12 +23,12 @@ const Letter: React.FC<Props> = ({ children }) => {
   useEffect(() => {
     // Define key color
     new Array(currentWord.length).fill('').map((_, i) => {
-      guesses.map((g) => {
-        if (g[i] === children && g.length > 5 && children !== 'OK') {
+      guesses.map((guess) => {
+        if (guess[i] === children && guess.length > 5 && children !== 'OK') {
           const newBgColor =
-            g[i] === currentWord[i]
+            guess[i] === currentWord[i]
               ? 'bg-green-400 text-font'
-              : currentWord.includes(g[i])
+              : currentWord.includes(guess[i])
               ? 'bg-yellow-400 text-font'
               : 'bg-gray-500 text-white';
 
