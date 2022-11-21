@@ -6,6 +6,7 @@ import words from '~/static/words';
 import { useError } from '~/contexts/Error';
 import { useEffect, useState } from 'react';
 import { useLettersNumber } from '~/contexts/LettersNumber';
+import getFinelLetter from '~/helpers/getFinelLetter';
 
 interface Props {
   children: React.ReactNode;
@@ -41,15 +42,6 @@ const Letter: React.FC<Props> = ({ children }) => {
     // Reaset key color if letterNumber change
     setBgColor('bg-gray-300 text-font');
   }, [lettersNumber]);
-
-  const getFinelLetter = (letter: string) => {
-    if (letter === 'כ') return 'ך';
-    if (letter === 'מ') return 'ם';
-    if (letter === 'נ') return 'ן';
-    if (letter === 'פ') return 'ף';
-    if (letter === 'צ') return 'ץ';
-    return letter;
-  };
 
   const clickHandle = () => {
     const newGuesses = guesses.map((guess, i) => {
