@@ -24,7 +24,7 @@ const Guess: React.FC<Props> = ({ guess }) => {
     >
       {new Array(currentWord.length).fill(0).map((_, i) => {
         const bgColor = !isConfirmed
-          ? 'bg-white'
+          ? 'bg-white border-2'
           : guess[i] === currentWord[i]
           ? 'bg-green-400 border-0'
           : currentWord.includes(guess[i])
@@ -34,7 +34,7 @@ const Guess: React.FC<Props> = ({ guess }) => {
         return (
           <div
             key={i}
-            className={`flex h-12 w-12 items-center justify-center rounded-md border-2 border-gray-300 font-bold ${bgColor}`}
+            className={`flex h-12 w-12 items-center justify-center rounded-md border-gray-300 font-bold ${bgColor}`}
           >
             {guess[i]}
           </div>

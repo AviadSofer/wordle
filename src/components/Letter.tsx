@@ -4,6 +4,8 @@ import { FiDelete } from 'react-icons/fi';
 import { AiOutlineEnter } from 'react-icons/ai';
 import words from '~/static/words';
 import { useError } from '~/contexts/Error';
+import { useEffect, useState } from 'react';
+import { useLettersNumber } from '~/contexts/LettersNumber';
 
 interface Props {
   children: React.ReactNode;
@@ -12,7 +14,33 @@ interface Props {
 const Letter: React.FC<Props> = ({ children }) => {
   const { guesses, setGuesses } = useGuesses();
   const { currentWord } = useCurrentWord();
+  const { lettersNumber } = useLettersNumber();
   const { setIsError, setErrorMsg } = useError();
+
+  const [bgColor, setBgColor] = useState('bg-gray-300 text-font');
+
+  useEffect(() => {
+    // Define key color
+    new Array(currentWord.length).fill('').map((_, i) => {
+      guesses.map((g) => {
+        if (g[i] === children && g.length > 5 && children !== 'OK') {
+          const newBgColor =
+            g[i] === currentWord[i]
+              ? 'bg-green-400 text-font'
+              : currentWord.includes(g[i])
+              ? 'bg-yellow-400 text-font'
+              : 'bg-gray-500 text-white';
+
+          setBgColor(newBgColor);
+        }
+      });
+    });
+  }, [children, currentWord, guesses]);
+
+  useEffect(() => {
+    // Reaset key color if letterNumber change
+    setBgColor('bg-gray-300 text-font');
+  }, [lettersNumber]);
 
   const getFinelLetter = (letter: string) => {
     if (letter === 'כ') return 'ך';
@@ -76,7 +104,7 @@ const Letter: React.FC<Props> = ({ children }) => {
 
   return (
     <div
-      className='flex h-11 min-w-[2rem] cursor-pointer items-center justify-center rounded-sm bg-gray-300 text-lg font-bold text-font'
+      className={`${bgColor} flex h-11 min-w-[2rem] cursor-pointer items-center justify-center rounded-sm text-lg font-bold`}
       onClick={clickHandle}
       aria-hidden='true'
     >
