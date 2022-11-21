@@ -3,7 +3,7 @@ import { useGuesses } from '~/contexts/Guesses';
 import { useLettersNumber } from '~/contexts/LettersNumber';
 import words from '~/static/words';
 
-const ChooseWord: React.FC = () => {
+const ChooseLetterNumber: React.FC = () => {
   const { lettersNumber, setLettersNumber } = useLettersNumber();
   const { setCurrentWord } = useCurrentWord();
   const { setGuesses } = useGuesses();
@@ -40,4 +40,4 @@ const ChooseWord: React.FC = () => {
   );
 };
 
-export default ChooseWord;
+export default ChooseLetterNumber;
