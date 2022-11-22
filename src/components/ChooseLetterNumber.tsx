@@ -1,7 +1,7 @@
 import { useCurrentWord } from '~/contexts/CurrentWord';
 import { useGuesses } from '~/contexts/Guesses';
 import { useLettersNumber } from '~/contexts/LettersNumber';
-import words from '~/static/words';
+import popularWords from '~/static/popularWords';
 
 const ChooseLetterNumber: React.FC = () => {
   const { lettersNumber, setLettersNumber } = useLettersNumber();
@@ -23,7 +23,7 @@ const ChooseLetterNumber: React.FC = () => {
             onClick={() => {
               setLettersNumber(i + 4);
 
-              const wordByLenght = words.filter((word) => {
+              const wordByLenght = popularWords.filter((word) => {
                 if (word.length === i + 4) return true;
               });
 

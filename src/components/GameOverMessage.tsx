@@ -2,7 +2,7 @@ import { useCurrentWord } from '~/contexts/CurrentWord';
 import { useGuesses } from '~/contexts/Guesses';
 import { useState, useEffect } from 'react';
 import { useLettersNumber } from '~/contexts/LettersNumber';
-import words from '~/static/words';
+import popularWords from '~/static/popularWords';
 
 const GameOverMessage: React.FC = () => {
   const { guesses, setGuesses } = useGuesses();
@@ -32,7 +32,7 @@ const GameOverMessage: React.FC = () => {
   }, [guesses, currentWord]);
 
   const newGameHandle = () => {
-    const fiveLettersWords = words.filter((word) => {
+    const fiveLettersWords = popularWords.filter((word) => {
       if (word.length === 5) return true;
     });
 

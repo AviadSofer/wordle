@@ -5,16 +5,17 @@ import Header from './components/Header';
 import Keyboard from './components/Keyboard';
 import { useCurrentWord } from './contexts/CurrentWord';
 import { useLettersNumber } from './contexts/LettersNumber';
-import words from './static/words';
+import popularWords from './static/popularWords';
 
 const App: React.FC = () => {
   const { setCurrentWord } = useCurrentWord();
   const { setLettersNumber } = useLettersNumber();
 
   useEffect(() => {
-    const fiveLelltersWords = words.filter((word) => {
+    const fiveLelltersWords = popularWords.filter((word) => {
       if (word.length === 5) return true;
     });
+
     setCurrentWord(fiveLelltersWords[~~(Math.random() * fiveLelltersWords.length)]);
     setLettersNumber(5);
 

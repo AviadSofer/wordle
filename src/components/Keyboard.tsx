@@ -3,7 +3,7 @@ import { useCurrentWord } from '~/contexts/CurrentWord';
 import { useError } from '~/contexts/Error';
 import { useGuesses } from '~/contexts/Guesses';
 import getFinelLetter from '~/helpers/getFinelLetter';
-import words from '~/static/words';
+import allWords from '~/static/allWords';
 import Letter from './Letter';
 
 const Keyboard: React.FC = () => {
@@ -25,7 +25,7 @@ const Keyboard: React.FC = () => {
 
             // Enter in the end
           } else if (key === 'Enter' && guess.length === currentWord.length) {
-            if (words.includes(guess)) {
+            if (allWords.includes(guess)) {
               return `${guess}OK`;
             } else {
               setIsError(true);

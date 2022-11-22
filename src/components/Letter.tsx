@@ -2,7 +2,7 @@ import { useCurrentWord } from '~/contexts/CurrentWord';
 import { useGuesses } from '~/contexts/Guesses';
 import { FiDelete } from 'react-icons/fi';
 import { AiOutlineEnter } from 'react-icons/ai';
-import words from '~/static/words';
+import allWords from '~/static/allWords';
 import { useError } from '~/contexts/Error';
 import { useEffect, useState } from 'react';
 import { useLettersNumber } from '~/contexts/LettersNumber';
@@ -56,7 +56,7 @@ const Letter: React.FC<Props> = ({ children }) => {
 
           // OK button in the end
         } else if (children === 'OK' && guess.length === currentWord.length) {
-          if (words.includes(guess)) {
+          if (allWords.includes(guess)) {
             return `${guess}OK`;
           } else {
             setIsError(true);
