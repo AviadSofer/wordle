@@ -1,13 +1,21 @@
 import { useCurrentWord } from '~/contexts/CurrentWord';
 import { useState, useEffect } from 'react';
+import { useLettersNumber } from '~/contexts/LettersNumber';
 
 interface Props {
   guess: string;
+  letters: number;
 }
 
-const Guess: React.FC<Props> = ({ guess }) => {
+const Guess: React.FC<Props> = ({ letters, guess }) => {
   const { currentWord } = useCurrentWord();
+  const { setLettersNumber } = useLettersNumber();
+
   const [isConfirmed, setIsConfirmed] = useState(false);
+
+  useEffect(() => {
+    setLettersNumber(letters);
+  }, [letters, setLettersNumber]);
 
   useEffect(() => {
     if (guess.length === currentWord.length + 2) {
