@@ -5,7 +5,6 @@ import { AiOutlineEnter } from 'react-icons/ai';
 import allWords from '~/static/allWords';
 import { useError } from '~/contexts/Error';
 import { useEffect, useState } from 'react';
-import { useLettersNumber } from '~/contexts/LettersNumber';
 import getFinelLetter from '~/helpers/getFinelLetter';
 
 interface Props {
@@ -15,7 +14,6 @@ interface Props {
 const Letter: React.FC<Props> = ({ children }) => {
   const { guesses, setGuesses } = useGuesses();
   const { currentWord } = useCurrentWord();
-  const { lettersNumber } = useLettersNumber();
   const { setIsError, setErrorMsg } = useError();
 
   const [bgColor, setBgColor] = useState('bg-gray-300 text-font');
@@ -42,9 +40,9 @@ const Letter: React.FC<Props> = ({ children }) => {
   }, [children, currentWord, guesses]);
 
   useEffect(() => {
-    // Reaset keys color if letterNumber change
+    // Reaset keys color if currentWord change
     setBgColor('bg-gray-300 text-font');
-  }, [lettersNumber]);
+  }, [currentWord]);
 
   const clickHandle = () => {
     const newGuesses = guesses.map((guess, i) => {

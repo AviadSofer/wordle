@@ -39,7 +39,7 @@ const GameOverMessage: React.FC = () => {
     setDisplay('hidden');
     setGuesses(new Array(6).fill(''));
     setCurrentWord(fiveLettersWords[~~(Math.random() * fiveLettersWords.length)]);
-    setLettersNumber(5 + 0.1);
+    setLettersNumber(5);
   };
 
   return (
