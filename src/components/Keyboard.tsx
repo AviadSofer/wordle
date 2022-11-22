@@ -14,6 +14,7 @@ const Keyboard: React.FC = () => {
   // Computer keyboard
   useEffect(() => {
     const checkKeyPress = (e: KeyboardEvent) => {
+      const hebrewLetters = 'אבגדהוזחטיכךלמםנןסעפףצץקרשת';
       const { key } = e;
 
       const newGuesses = guesses.map((guess, i) => {
@@ -33,11 +34,15 @@ const Keyboard: React.FC = () => {
             }
 
             // Make finel letters
-          } else if (guess.length === currentWord.length - 1) {
+          } else if (hebrewLetters.includes(key) && guess.length === currentWord.length - 1) {
             return `${guess}${getFinelLetter(`${key}`)}`;
 
             // Rest of the cases
-          } else if (key !== ' ' && guess.length < currentWord.length) {
+          } else if (
+            hebrewLetters.includes(key) &&
+            key !== ' ' &&
+            guess.length < currentWord.length
+          ) {
             return `${guess}${key}`;
           }
         }
