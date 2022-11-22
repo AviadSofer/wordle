@@ -16,7 +16,9 @@ const ChooseLetterNumber: React.FC = () => {
           <div
             key={i}
             className={`flex h-10 w-10 cursor-pointer items-center justify-center rounded-md text-lg ${
-              i + 4 === lettersNumber ? 'bg-green-500 text-white' : 'bg-blue-50 text-font'
+              i + 4 === Math.round(lettersNumber)
+                ? 'bg-green-500 text-white'
+                : 'bg-blue-50 text-font'
             }`}
             onClick={() => {
               setLettersNumber(i + 4);

@@ -24,22 +24,25 @@ const Letter: React.FC<Props> = ({ children }) => {
     // Define key color
     new Array(currentWord.length).fill('').map((_, i) => {
       guesses.map((guess) => {
-        if (guess[i] === children && guess.length > 5 && children !== 'OK') {
-          const newBgColor =
-            guess[i] === currentWord[i]
-              ? 'bg-green-400 text-font'
-              : currentWord.includes(guess[i])
-              ? 'bg-yellow-400 text-font'
-              : 'bg-gray-500 text-white';
+        if (guess.length > currentWord.length && children !== 'OK') {
+          // Or just letter ot finel letter
+          if (guess[i] === children || guess[i] === getFinelLetter(`${children}`)) {
+            const newBgColor =
+              guess[i] === currentWord[i]
+                ? 'bg-green-400 text-font'
+                : currentWord.includes(guess[i])
+                ? 'bg-yellow-400 text-font'
+                : 'bg-gray-500 text-white';
 
-          setBgColor(newBgColor);
+            setBgColor(newBgColor);
+          }
         }
       });
     });
   }, [children, currentWord, guesses]);
 
   useEffect(() => {
-    // Reaset key color if letterNumber change
+    // Reaset keys color if letterNumber change
     setBgColor('bg-gray-300 text-font');
   }, [lettersNumber]);
 
