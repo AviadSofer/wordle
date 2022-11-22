@@ -68,11 +68,11 @@ const Letter: React.FC<Props> = ({ children }) => {
           return guess.slice(0, -1);
 
           // Make finel letters
-        } else if (guess.length === currentWord.length - 1 && children !== 'OK') {
+        } else if (guess.length === currentWord.length - 1) {
           return `${guess}${getFinelLetter(`${children}`)}`;
 
           // Rest of the cases
-        } else if (guess.length < currentWord.length && children !== 'OK') {
+        } else if (guess.length < currentWord.length) {
           return `${guess}${children}`;
         }
       }
