@@ -1,6 +1,7 @@
 import { useCurrentWord } from '~/contexts/CurrentWord';
-import { useState, useEffect } from 'react';
-import { useLettersNumber } from '~/contexts/LettersNumber';
+import { useEffect } from 'react';
+import popularWords from '~/static/popularWords';
+import { useGuesses } from '~/contexts/Guesses';
 
 interface Props {
   guess: string;
@@ -8,22 +9,18 @@ interface Props {
 }
 
 const Guess: React.FC<Props> = ({ letters, guess }) => {
-  const { currentWord } = useCurrentWord();
-  const { setLettersNumber } = useLettersNumber();
-
-  const [isConfirmed, setIsConfirmed] = useState(false);
+  const { currentWord, setCurrentWord } = useCurrentWord();
+  const { setGuesses } = useGuesses();
 
   useEffect(() => {
-    setLettersNumber(letters);
-  }, [letters, setLettersNumber]);
+    const wordByLenght = popularWords.filter((word) => {
+      if (word.length === letters) return true;
+    });
+    const randomCurrentWord = wordByLenght[~~(Math.random() * wordByLenght.length)];
 
-  useEffect(() => {
-    if (guess.length === currentWord.length + 2) {
-      setIsConfirmed(true);
-    } else {
-      setIsConfirmed(false);
-    }
-  }, [currentWord, guess]);
+    setCurrentWord(randomCurrentWord);
+    setGuesses(new Array(6).fill(''));
+  }, [letters, setCurrentWord, setGuesses]);
 
   return (
     <div
@@ -31,13 +28,14 @@ const Guess: React.FC<Props> = ({ letters, guess }) => {
       className='grid gap-x-1'
     >
       {new Array(currentWord.length).fill(0).map((_, i) => {
-        const bgColor = !isConfirmed
-          ? 'bg-white border-2'
-          : guess[i] === currentWord[i]
-          ? 'bg-green-400 border-0'
-          : currentWord.includes(guess[i])
-          ? 'bg-yellow-400 border-0'
-          : 'bg-gray-500 text-white border-0';
+        const bgColor =
+          guess.length !== currentWord.length + 2
+            ? 'bg-white border-2'
+            : guess[i] === currentWord[i]
+            ? 'bg-green-400 border-0'
+            : currentWord.includes(guess[i])
+            ? 'bg-yellow-400 border-0'
+            : 'bg-gray-500 text-white border-0';
 
         return (
           <div

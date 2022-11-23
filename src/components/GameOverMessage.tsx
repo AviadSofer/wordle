@@ -1,13 +1,11 @@
 import { useCurrentWord } from '~/contexts/CurrentWord';
 import { useGuesses } from '~/contexts/Guesses';
 import { useState, useEffect } from 'react';
-import { useLettersNumber } from '~/contexts/LettersNumber';
 import popularWords from '~/static/popularWords';
 
 const GameOverMessage: React.FC = () => {
   const { guesses, setGuesses } = useGuesses();
   const { currentWord, setCurrentWord } = useCurrentWord();
-  const { setLettersNumber } = useLettersNumber();
 
   const [display, setDisplay] = useState('hidden');
   const [bgColor, setBgColor] = useState('');
@@ -20,15 +18,14 @@ const GameOverMessage: React.FC = () => {
         setDisplay('flex');
         setBgColor('bg-green-400');
         setMsg('גילית את המילה!');
+
+        // Lost
+      } else if (guesses.every((guess) => guess.length === currentWord.length + 2)) {
+        setDisplay('flex');
+        setBgColor('bg-red-400');
+        setMsg('נכשלת :(');
       }
     });
-
-    // Lost
-    if (guesses.every((guess) => guess.length === currentWord.length + 2)) {
-      setDisplay('flex');
-      setBgColor('bg-red-400');
-      setMsg('נכשלת :(');
-    }
   }, [guesses, currentWord]);
 
   const newGameHandle = () => {
@@ -37,9 +34,8 @@ const GameOverMessage: React.FC = () => {
     });
 
     setDisplay('hidden');
-    setGuesses(new Array(6).fill(''));
     setCurrentWord(fiveLettersWords[~~(Math.random() * fiveLettersWords.length)]);
-    setLettersNumber(5);
+    setGuesses(new Array(6).fill(''));
   };
 
   return (
