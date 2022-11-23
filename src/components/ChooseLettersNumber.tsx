@@ -5,7 +5,7 @@ import { useLettersNumber } from '~/contexts/LettersNumber';
 import popularWords from '~/static/popularWords';
 import { Link } from 'react-router-dom';
 
-const ChooseLetterNumber: React.FC = () => {
+const ChooseLettersNumber: React.FC = () => {
   const { lettersNumber, setLettersNumber } = useLettersNumber();
   const { setCurrentWord } = useCurrentWord();
   const { setGuesses } = useGuesses();
@@ -41,4 +41,4 @@ const ChooseLetterNumber: React.FC = () => {
   );
 };
 
-export default ChooseLetterNumber;
+export default ChooseLettersNumber;
