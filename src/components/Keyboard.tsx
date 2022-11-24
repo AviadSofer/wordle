@@ -3,22 +3,29 @@ import { useCurrentWord } from '~/contexts/CurrentWord';
 import { useError } from '~/contexts/Error';
 import { useGuesses } from '~/contexts/Guesses';
 import getFinelLetter from '~/helpers/getFinelLetter';
+import hebrewLetters from '~/static/hebrewLetters';
 import allWords from '~/static/allWords';
 import Letter from './Letter';
+import { useLocation } from 'react-router-dom';
 
 const Keyboard: React.FC = () => {
   const { guesses, setGuesses } = useGuesses();
   const { currentWord } = useCurrentWord();
   const { setIsError, setErrorMsg } = useError();
 
+  const location = useLocation();
+
   // Computer keyboard
   useEffect(() => {
     const checkKeyPress = (e: KeyboardEvent) => {
-      const hebrewLetters = 'אבגדהוזחטיכךלמםנןסעפףצץקרשת';
       const { key } = e;
+      const targetElement = e.target as HTMLElement;
 
       const newGuesses = guesses.map((guess, i) => {
-        if (i === guesses.findIndex((item) => item.length < currentWord.length + 2)) {
+        if (
+          i === guesses.findIndex((item) => item.length < currentWord.length + 2) &&
+          !targetElement.tagName.toLowerCase().includes('input')
+        ) {
           // Just Enter
           if (key === 'Enter' && guess.length < currentWord.length) {
             setIsError(true);
@@ -26,7 +33,7 @@ const Keyboard: React.FC = () => {
 
             // Enter in the end
           } else if (key === 'Enter' && guess.length === currentWord.length) {
-            if (allWords.includes(guess)) {
+            if (allWords.includes(guess) || location.pathname.includes('word')) {
               return `${guess}OK`;
             } else {
               setIsError(true);
@@ -56,7 +63,7 @@ const Keyboard: React.FC = () => {
     return () => {
       window.removeEventListener('keypress', checkKeyPress);
     };
-  }, [currentWord.length, guesses, setErrorMsg, setGuesses, setIsError]);
+  }, [currentWord.length, guesses, location.pathname, setErrorMsg, setGuesses, setIsError]);
 
   // Backspackey in computer keyboard
   useEffect(() => {

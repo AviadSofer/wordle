@@ -1,7 +1,8 @@
 import { useCurrentWord } from '~/contexts/CurrentWord';
 import { useGuesses } from '~/contexts/Guesses';
 import { useState, useEffect } from 'react';
-import popularWords from '~/static/popularWords';
+import getRandomWord from '~/helpers/getRandomWord';
+import { Link } from 'react-router-dom';
 
 const GameOverMessage: React.FC = () => {
   const { guesses, setGuesses } = useGuesses();
@@ -29,12 +30,8 @@ const GameOverMessage: React.FC = () => {
   }, [guesses, currentWord]);
 
   const newGameHandle = () => {
-    const fiveLettersWords = popularWords.filter((word) => {
-      if (word.length === 5) return true;
-    });
-
     setDisplay('hidden');
-    setCurrentWord(fiveLettersWords[~~(Math.random() * fiveLettersWords.length)]);
+    setCurrentWord(getRandomWord(5));
     setGuesses(new Array(6).fill(''));
   };
 
@@ -47,9 +44,11 @@ const GameOverMessage: React.FC = () => {
       >
         <h1 className='text-4xl font-bold text-white'>{msg}</h1>
         <h2 className='text-2xl font-bold text-white'>המילה הנכונה: {currentWord}</h2>
-        <button onClick={newGameHandle} className='rounded-lg bg-white py-1 px-3 text-font'>
-          משחק חדש
-        </button>
+        <Link to={'/'}>
+          <button onClick={newGameHandle} className='rounded-lg bg-white py-1 px-3 text-font'>
+            משחק חדש
+          </button>
+        </Link>
       </div>
     </div>
   );

@@ -1,26 +1,35 @@
 import { useCurrentWord } from '~/contexts/CurrentWord';
 import { useEffect } from 'react';
-import popularWords from '~/static/popularWords';
 import { useGuesses } from '~/contexts/Guesses';
+import getRandomWord from '~/helpers/getRandomWord';
+import { useParams } from 'react-router-dom';
+import { decodeString } from '~/helpers/encode';
 
 interface Props {
   guess: string;
-  letters: number;
+  letters?: number;
 }
 
 const Guess: React.FC<Props> = ({ letters, guess }) => {
   const { currentWord, setCurrentWord } = useCurrentWord();
   const { setGuesses } = useGuesses();
 
-  useEffect(() => {
-    const wordByLenght = popularWords.filter((word) => {
-      if (word.length === letters) return true;
-    });
-    const randomCurrentWord = wordByLenght[~~(Math.random() * wordByLenght.length)];
+  const { id } = useParams();
 
-    setCurrentWord(randomCurrentWord);
-    setGuesses(new Array(6).fill(''));
+  useEffect(() => {
+    if (letters) {
+      setCurrentWord(getRandomWord(letters));
+      setGuesses(new Array(6).fill(''));
+    }
   }, [letters, setCurrentWord, setGuesses]);
+
+  useEffect(() => {
+    if (id) {
+      const decodedUrl = decodeString(id);
+      const newCurrentWord = decodedUrl.split(',')[1];
+      setCurrentWord(newCurrentWord);
+    }
+  }, [id, setCurrentWord]);
 
   return (
     <div

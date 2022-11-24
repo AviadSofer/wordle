@@ -2,12 +2,13 @@ import { useGuesses } from '~/contexts/Guesses';
 import Guess from './Guess';
 import ErrorMessage from './ErrorMessage';
 import { Route, Routes } from 'react-router-dom';
+import Hint from './Hint';
 
 const GuessesGrid: React.FC = () => {
   const { guesses } = useGuesses();
 
   return (
-    <div className='relative grid gap-y-1'>
+    <div className='grid gap-y-1'>
       <ErrorMessage />
       <Routes>
         {new Array(8).fill(0).map((_, i) => (
@@ -19,6 +20,19 @@ const GuessesGrid: React.FC = () => {
             ))}
           />
         ))}
+
+        <Route
+          path={`/word/:id`}
+          element={
+            <>
+              <Hint />
+              {guesses.map((guess, guessKey) => (
+                <Guess key={guessKey} guess={guess} />
+              ))}
+            </>
+          }
+        />
+
         <Route
           path={`/`}
           element={guesses.map((guess, guessKey) => (
