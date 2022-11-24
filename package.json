@@ -6,7 +6,6 @@
   "scripts": {
     "start": "node dist/app.js",
     "dev": "nodemon",
-    "lint": "npx eslint . --ext .ts",
     "build": "npm install && tsc && cd client && npm install && npm run build"
   },
   "author": "",
