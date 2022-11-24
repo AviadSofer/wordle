@@ -7,8 +7,9 @@ const app: Application = express();
 const port = process.env.PORT || 5000;
 
 // serve the client
+app.use(express.static(path.join(path.resolve(), 'client', 'dist')));
 app.get('/*', (req, res) => {
-  res.send('hI');
+  res.sendFile(path.join(path.resolve(), 'client', 'dist', 'index.html'));
 });
 
 // start express server on port 5000

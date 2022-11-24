@@ -4,19 +4,19 @@
         "module": "commonjs",
         "sourceMap": true,
         "outDir": "./dist",
-        "rootDir": "./src",
+        "rootDir": "./api",
         /* Strict Type-Checking Options */
         "strict": true,
         "noImplicitAny": true,
         /* Module Resolution Options */
         "moduleResolution": "node",
-        "baseUrl": "./src",
+        "baseUrl": "./api",
         "esModuleInterop": true,
         /* Advanced Options */
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true
     },
     "lib": ["es2015"],
-    "include": ["src/**/*"],
-    "exclude": ["node_modules", "dist", "./src/tests/**/*"]
+    "include": ["./api/**/*"],
+    "exclude": ["node_modules", "dist", "./api/tests/**/*"]
 }
