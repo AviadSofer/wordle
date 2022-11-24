@@ -32,6 +32,7 @@ const CreateWord: React.FC = () => {
   const onClickHandle = () => {
     if (word.length >= 4) {
       setDisplay('hidden');
+      setHint('');
       setWord('');
     }
   };
