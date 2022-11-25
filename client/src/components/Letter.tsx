@@ -20,24 +20,27 @@ const Letter: React.FC<Props> = ({ children }) => {
 
   useEffect(() => {
     // Define key color
-    new Array(currentWord.length).fill('').map((_, i) => {
-      guesses.map((guess) => {
+    console.log(currentWord);
+    guesses.map((guess) => {
+      new Array(currentWord.length).fill('').map((_, i) => {
         if (guess.length > currentWord.length && children !== 'OK') {
           // Or just letter ot finel letter
           if (guess[i] === children || guess[i] === getFinelLetter(`${children}`)) {
             const newBgColor =
               guess[i] === currentWord[i]
                 ? 'bg-green-400 text-font'
-                : currentWord.includes(guess[i])
+                : currentWord.includes(guess[i]) && bgColor !== 'bg-green-400 text-font'
                 ? 'bg-yellow-400 text-font'
-                : 'bg-gray-500 text-white';
+                : bgColor !== 'bg-green-400 text-font'
+                ? 'bg-gray-500 text-white'
+                : 'bg-green-400 text-font';
 
             setBgColor(newBgColor);
           }
         }
       });
     });
-  }, [children, currentWord, guesses]);
+  }, [currentWord, guesses]);
 
   useEffect(() => {
     // Reaset keys color if currentWord change
