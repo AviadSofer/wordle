@@ -63,7 +63,7 @@ const Keyboard: React.FC = () => {
     return () => {
       window.removeEventListener('keypress', checkKeyPress);
     };
-  }, [currentWord.length, guesses, location.pathname, setErrorMsg, setGuesses, setIsError]);
+  }, [currentWord, guesses, location, setErrorMsg, setGuesses, setIsError]);
 
   // Backspackey in computer keyboard
   useEffect(() => {
@@ -87,25 +87,25 @@ const Keyboard: React.FC = () => {
     return () => {
       window.removeEventListener('keydown', checkKeyDown);
     };
-  }, [currentWord.length, guesses, setGuesses]);
+  }, [currentWord, guesses, setGuesses]);
 
   const firstRow = ['OK', 'D', 'פ', 'ו', 'ט', 'א', 'ר', 'ק'];
   const secondRow = ['ל', 'ח', 'י', 'ע', 'כ', 'ג', 'ד', 'ש'];
   const thirdRow = ['ת', 'צ', 'מ', 'נ', 'ה', 'ב', 'ס', 'ז'];
 
   return (
-    <div className='flex flex-col items-end gap-y-1'>
-      <div className='flex gap-x-1'>
+    <div className='flex flex-col items-end gap-y-1.5 md:gap-y-1'>
+      <div className='flex gap-x-1.5 md:gap-x-1'>
         {firstRow.map((letter, i) => (
           <Letter key={i}>{letter}</Letter>
         ))}
       </div>
-      <div className='flex gap-x-1'>
+      <div className='flex gap-x-1.5 md:gap-x-1'>
         {secondRow.map((letter, i) => (
           <Letter key={i}>{letter}</Letter>
         ))}
       </div>
-      <div className='flex gap-x-1'>
+      <div className='flex gap-x-1.5 md:gap-x-1'>
         {thirdRow.map((letter, i) => (
           <Letter key={i}>{letter}</Letter>
         ))}

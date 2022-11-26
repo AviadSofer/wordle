@@ -20,7 +20,7 @@ const Hint: React.FC = () => {
 
   return (
     <div
-      className={`fixed top-6 right-0 left-0 mx-auto flex h-20 w-1/2 flex-col items-center justify-center bg-white`}
+      className={`fixed top-6 right-0 left-0 mx-auto flex h-20 w-full flex-col items-center justify-center bg-white md:w-1/2`}
     >
       <h1 className='pb-2 text-2xl font-bold text-font'>מילה מותאמת אישית</h1>
       <h2 className={`${display} text-xl font-medium text-font`}>{`רמז: ${hint}`}</h2>

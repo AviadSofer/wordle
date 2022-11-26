@@ -31,6 +31,9 @@ const CreateWord: React.FC = () => {
 
   const onClickHandle = () => {
     if (word.length >= 4) {
+      navigator.clipboard.writeText(
+        `${window.location.origin}/word/${encodeString(`${hint},${word}`)}`,
+      );
       setDisplay('hidden');
       setHint('');
       setWord('');
@@ -48,7 +51,7 @@ const CreateWord: React.FC = () => {
       </button>
 
       <div className={`${display} fixed top-0 right-0 h-full w-full`}>
-        <div className='relative mx-auto my-auto flex h-1/2 w-1/3 flex-col items-center rounded-md bg-white py-5 shadow-2xl'>
+        <div className='relative mx-auto my-auto flex w-5/6 flex-col items-center rounded-md bg-white py-5 shadow-2xl md:h-1/2 md:w-1/3'>
           <IoClose
             className='absolute right-9 top-6 cursor-pointer'
             size={25}
@@ -88,7 +91,7 @@ const CreateWord: React.FC = () => {
               onClick={onClickHandle}
               className='text-md rounded-md bg-blue-800 px-7 py-3 font-medium text-white hover:bg-blue-900'
             >
-              יצירת קישור
+              העתקה וכניסה לקישור
             </button>
           </Link>
         </div>

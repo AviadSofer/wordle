@@ -20,7 +20,6 @@ const Letter: React.FC<Props> = ({ children }) => {
 
   useEffect(() => {
     // Define key color
-    console.log(currentWord);
     guesses.map((guess) => {
       new Array(currentWord.length).fill('').map((_, i) => {
         if (guess.length > currentWord.length && children !== 'OK') {
@@ -40,7 +39,7 @@ const Letter: React.FC<Props> = ({ children }) => {
         }
       });
     });
-  }, [currentWord, guesses]);
+  }, [bgColor, children, currentWord, guesses]);
 
   useEffect(() => {
     // Reaset keys color if currentWord change

@@ -7,7 +7,7 @@ const ChooseLettersNumber: React.FC = () => {
   return (
     <div className='flex flex-col justify-between'>
       <h2 className='pr-1 text-lg font-semibold'>שחקו במילים מוכנות</h2>
-      <div className='inline-grid grid-cols-8 grid-rows-1 gap-3'>
+      <div className='inline-grid grid-cols-4 gap-3 md:grid-cols-8'>
         {new Array(8).fill(0).map((_, i) => (
           <Link key={i} to={`/${i + 4}-letters`}>
             <div

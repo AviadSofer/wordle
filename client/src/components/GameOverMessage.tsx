@@ -40,12 +40,12 @@ const GameOverMessage: React.FC = () => {
       className={`${display} absolute top-0 bottom-0 my-auto h-full w-full items-center justify-center`}
     >
       <div
-        className={`${bgColor} flex h-2/5 w-1/3 flex-col items-center justify-center gap-7 rounded-md shadow-2xl`}
+        className={`${bgColor} flex h-2/5 w-11/12 flex-col items-center justify-center gap-7 rounded-md shadow-2xl md:w-1/3`}
       >
         <h1 className='text-4xl font-bold text-white'>{msg}</h1>
         <h2 className='text-2xl font-bold text-white'>המילה הנכונה: {currentWord}</h2>
         <Link to={'/'}>
-          <button onClick={newGameHandle} className='rounded-lg bg-white py-1 px-3 text-font'>
+          <button onClick={newGameHandle} className='rounded-md bg-white py-1.5 px-7 text-font'>
             משחק חדש
           </button>
         </Link>

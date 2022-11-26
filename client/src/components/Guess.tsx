@@ -1,5 +1,5 @@
 import { useCurrentWord } from '~/contexts/CurrentWord';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useGuesses } from '~/contexts/Guesses';
 import getRandomWord from '~/helpers/getRandomWord';
 import { useParams } from 'react-router-dom';
@@ -11,6 +11,8 @@ interface Props {
 }
 
 const Guess: React.FC<Props> = ({ letters, guess }) => {
+  const [boxSize, setBoxSize] = useState('');
+
   const { currentWord, setCurrentWord } = useCurrentWord();
   const { setGuesses } = useGuesses();
 
@@ -31,10 +33,26 @@ const Guess: React.FC<Props> = ({ letters, guess }) => {
     }
   }, [id, setCurrentWord]);
 
+  useEffect(() => {
+    const length = currentWord.length;
+
+    setBoxSize(
+      length < 6
+        ? 'h-14 w-14'
+        : length < 8
+        ? 'h-12 w-12'
+        : length < 9
+        ? 'h-12 w-10'
+        : length < 10
+        ? 'h-12 w-9'
+        : 'h-12 w-8',
+    );
+  }, [currentWord]);
+
   return (
     <div
       style={{ gridTemplateColumns: `repeat(${currentWord.length}, minmax(0, 1fr))` }}
-      className='grid gap-x-1'
+      className='grid gap-x-1.5'
     >
       {new Array(currentWord.length).fill(0).map((_, i) => {
         const bgColor =
@@ -49,7 +67,7 @@ const Guess: React.FC<Props> = ({ letters, guess }) => {
         return (
           <div
             key={i}
-            className={`flex h-12 w-12 items-center justify-center rounded-md border-gray-300 font-bold ${bgColor}`}
+            className={`flex ${boxSize} ${bgColor} items-center justify-center rounded-md border-gray-300 font-bold md:h-12 md:w-12`}
           >
             {guess[i]}
           </div>

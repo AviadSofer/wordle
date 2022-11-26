@@ -3,12 +3,18 @@ import Guess from './Guess';
 import ErrorMessage from './ErrorMessage';
 import { Route, Routes } from 'react-router-dom';
 import Hint from './Hint';
+import { useCurrentWord } from '~/contexts/CurrentWord';
 
 const GuessesGrid: React.FC = () => {
   const { guesses } = useGuesses();
+  const { currentWord } = useCurrentWord();
 
   return (
-    <div className='grid gap-y-1'>
+    <div
+      className={`grid py-10 md:py-0 ${
+        currentWord.length > 6 ? 'gap-y-2.5' : 'gap-y-1.5'
+      } md:gap-y-1.5`}
+    >
       <ErrorMessage />
       <Routes>
         {new Array(8).fill(0).map((_, i) => (
