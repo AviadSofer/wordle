@@ -6,17 +6,22 @@ import { useParams } from 'react-router-dom';
 import { decodeString } from '~/helpers/encode';
 
 interface Props {
+  title: string;
   guess: string;
   letters?: number;
 }
 
-const Guess: React.FC<Props> = ({ letters, guess }) => {
+const Guess: React.FC<Props> = ({ title, letters, guess }) => {
   const [boxSize, setBoxSize] = useState('');
 
   const { currentWord, setCurrentWord } = useCurrentWord();
   const { setGuesses } = useGuesses();
 
   const { id } = useParams();
+
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
 
   useEffect(() => {
     if (letters) {

@@ -23,7 +23,12 @@ const GuessesGrid: React.FC = () => {
             key={i}
             path={`/${i + 4}-letters`}
             element={guesses.map((guess, guessKey) => (
-              <Guess key={guessKey} guess={guess} letters={i + 4} />
+              <Guess
+                key={guessKey}
+                title={`מילהלה - משחק מילים בעברית עם ${i + 4} אותיות`}
+                guess={guess}
+                letters={i + 4}
+              />
             ))}
           />
         ))}
@@ -34,7 +39,7 @@ const GuessesGrid: React.FC = () => {
             <>
               <Hint />
               {guesses.map((guess, guessKey) => (
-                <Guess key={guessKey} guess={guess} />
+                <Guess title={'מילהלה - מילה מותאמת אישית'} key={guessKey} guess={guess} />
               ))}
             </>
           }
@@ -45,7 +50,7 @@ const GuessesGrid: React.FC = () => {
         <Route
           path={`/`}
           element={guesses.map((guess, guessKey) => (
-            <Guess key={guessKey} guess={guess} letters={5} />
+            <Guess key={guessKey} title={'מילהלה - משחק מילים בעברית'} guess={guess} letters={5} />
           ))}
         />
       </Routes>
