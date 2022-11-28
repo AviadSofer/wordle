@@ -13,7 +13,7 @@ dbConnect();
 
 // Add routes
 app.use(express.json());
-app.use('/api/getOffensiveWords', getOffensiveWords);
+app.use('/api/get-offensive-words', getOffensiveWords);
 
 // Serve the client
 app.use(express.static(path.join(path.resolve(), 'client', 'dist')));

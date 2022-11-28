@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node dist/app.js",
     "dev": "nodemon",
-    "build": "npm install && tsc && cd client && npm install && npm run build"
+    "build": "npm install && tsc && cd client && npm install && npm run build",
+    "tsc": "tsc"
   },
   "author": "",
   "license": "ISC",

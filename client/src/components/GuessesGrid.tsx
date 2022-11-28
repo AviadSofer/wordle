@@ -4,6 +4,7 @@ import ErrorMessage from './ErrorMessage';
 import { Route, Routes } from 'react-router-dom';
 import Hint from './Hint';
 import { useCurrentWord } from '~/contexts/CurrentWord';
+import AdminPanel from './AdminPanel';
 
 const GuessesGrid: React.FC = () => {
   const { guesses } = useGuesses();
@@ -38,6 +39,8 @@ const GuessesGrid: React.FC = () => {
             </>
           }
         />
+
+        <Route path={`/admin`} element={<AdminPanel />} />
 
         <Route
           path={`/`}
