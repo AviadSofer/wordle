@@ -56,7 +56,7 @@ const Letter: React.FC<Props> = ({ children }) => {
 
           // OK button in the end
         } else if (children === 'OK' && guess.length === currentWord.length) {
-          if (allWords.includes(guess)) {
+          if (allWords.includes(guess) || location.pathname.includes('word')) {
             return `${guess}OK`;
           } else {
             setIsError(true);
