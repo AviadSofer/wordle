@@ -29,11 +29,14 @@ const CreateWordPage: React.FC = () => {
     (async () => {
       // const offensiveWords = await getOffensiveWords();
       // setWordList(offensiveWords);
-      setWordList([{ word: '' }]);
+      setWordList([{ word: 'מניאק' }]);
 
       // Handeling showErr
       if (word.length > 0 && word.length < 4) {
         setErrMsg('בין 4 ל11 אותיות');
+        setShowErr(true);
+      } else if ([...'ךםןףץ'].some((letter) => word.slice(0, word.length - 1).includes(letter))) {
+        setErrMsg('אות סופית יכולה להיות רק באמצע מילה');
         setShowErr(true);
       } else if (wordsList.find((e) => e.word === word)) {
         setErrMsg('מילה פוגענית');
@@ -50,10 +53,14 @@ const CreateWordPage: React.FC = () => {
 
   const onWordChange = (e: ChangeEvent<HTMLInputElement>) => {
     let { value } = e.target;
+
     value = value.slice(0, 11);
+
     if (hebrewLetters.includes(`${[...value].pop()}`) || value === '') {
-      // const withFinelLetter = 'ךםןףץ'.includes(`${[...value].pop()}`);
       setWord(value);
+    } else {
+      setErrMsg('אפשר לכתוב רק בעברית, ובלי רווחים');
+      setShowErr(true);
     }
   };
 
@@ -110,7 +117,7 @@ const CreateWordPage: React.FC = () => {
           <IoClose className='absolute right-1 top-6 cursor-pointer md:right-14' size={25} />
         </Link>
 
-        <h1 className='pt-5 text-2xl font-bold text-font'>יצירת משחק מילים</h1>
+        <h1 className='pt-5 text-xl font-bold text-font'>יצירת משחק מילים</h1>
 
         <label htmlFor='hint' className='mt-2 text-xl font-medium text-font'>
           מילה
@@ -148,7 +155,7 @@ const CreateWordPage: React.FC = () => {
             onClick={copyLink}
             className={`${
               isCopy ? 'flex opacity-100' : 'flex opacity-0'
-            } absolute h-10 w-36 items-center rounded-md bg-black px-4 text-xs font-semibold duration-1000 md:bottom-0 md:right-[-10rem] md:my-auto md:h-8 md:w-auto md:text-sm`}
+            } absolute h-10 w-36 items-center rounded-md bg-black px-4 text-xs font-semibold duration-1000 md:bottom-0 md:top-0 md:right-[-10rem] md:my-auto md:h-8 md:w-auto md:text-sm`}
           >
             הועתק ללוח העריכה
           </div>
@@ -171,7 +178,7 @@ const CreateWordPage: React.FC = () => {
           </Link>
         </div>
 
-        <h1 className='pt-8 pb-3 text-2xl font-bold text-font'>שחקו במילים מוכנות</h1>
+        <h1 className='pt-8 pb-3 text-xl font-bold text-font'>שחקו במילים מוכנות</h1>
 
         <div className='flex md:gap-3'>
           {new Array(8).fill(0).map((_, i) => (
