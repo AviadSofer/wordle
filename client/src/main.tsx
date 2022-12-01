@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
 import App from './App';
+import CreateWordPage from './components/CreateWordPage';
 import AdminPanel from './components/AdminPanel';
 import WordsByLenght from './components/WordsByLenght';
 
@@ -25,6 +26,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
               <CurrentLevel>
                 <Routes>
                   <Route path='/*' element={<App />} />
+                  <Route path='/create-new-word' element={<CreateWordPage />} />
                   <Route path='/admin' element={<AdminPanel />} />
                   <Route path='/all-words/:id' element={<WordsByLenght />} />
                 </Routes>

@@ -3,7 +3,7 @@ import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 import { Route, Routes } from 'react-router-dom';
 import { useCurrentWord } from '~/contexts/CurrentWord';
 import ChooseLettersNumber from './ChooseLettersNumber';
-import CreateWord from './CreateWord';
+import CreateWordButton from './CreateWordButton';
 import Difficulty from './Difficulty';
 import Hint from './Hint';
 import Info from './Info';
@@ -48,7 +48,7 @@ const Header: React.FC = () => {
                 <Difficulty />
               </div>
               <ChooseLettersNumber />
-              <CreateWord />
+              <CreateWordButton />
             </div>
 
             <div
