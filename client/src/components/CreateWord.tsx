@@ -160,9 +160,10 @@ const CreateWord: React.FC = () => {
                   </button>
 
                   <div
+                    onClick={copyLink}
                     className={`${
-                      isCopy ? 'opacity-100' : 'hidden md:block md:opacity-0'
-                    } absolute flex h-10 w-36 items-center rounded-md bg-black px-4 text-xs font-semibold duration-1000 md:bottom-0 md:right-[-10rem] md:my-auto md:h-8 md:text-sm`}
+                      isCopy ? 'flex opacity-100' : 'flex opacity-0'
+                    } absolute h-10 w-36 items-center rounded-md bg-black px-4 text-xs font-semibold duration-1000 md:bottom-0 md:right-[-10rem] md:my-auto md:h-8 md:w-auto md:text-sm`}
                   >
                     הועתק ללוח העריכה
                   </div>

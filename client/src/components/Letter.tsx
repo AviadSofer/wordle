@@ -5,7 +5,7 @@ import { AiOutlineEnter } from 'react-icons/ai';
 import allWords from '~/static/allWords';
 import { useError } from '~/contexts/Error';
 import { useEffect, useState } from 'react';
-import getFinelLetter from '~/helpers/getFinelLetter';
+import { getFinelLetter, getNormalLetter } from '~/helpers/getLetter';
 import { useCurrentLevel } from '~/contexts/currentLevel';
 
 interface Props {
@@ -26,11 +26,16 @@ const Letter: React.FC<Props> = ({ children }) => {
       new Array(currentWord.length).fill('').map((_, i) => {
         if (guess.length > currentWord.length && children !== 'OK') {
           // Or just letter ot finel letter
-          if (guess[i] === children || guess[i] === getFinelLetter(`${children}`)) {
+          const finelLetter = getFinelLetter(`${children}`);
+          const normalLetter = getNormalLetter(`${children}`);
+          if (guess[i] === children || guess[i] === finelLetter || guess[i] === normalLetter) {
             const newBgColor =
               guess[i] === currentWord[i]
                 ? 'bg-green-400 text-font'
-                : currentWord.includes(guess[i]) && bgColor !== 'bg-green-400 text-font'
+                : (currentWord.includes(guess[i]) ||
+                    currentWord.includes(finelLetter) ||
+                    currentWord.includes(normalLetter)) &&
+                  bgColor !== 'bg-green-400 text-font'
                 ? 'bg-yellow-400 text-font'
                 : bgColor !== 'bg-green-400 text-font'
                 ? 'bg-gray-500 text-white'

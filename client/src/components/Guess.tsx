@@ -5,6 +5,7 @@ import getRandomWord from '~/helpers/getRandomWord';
 import { useParams } from 'react-router-dom';
 import { decodeString } from '~/helpers/encode';
 import { Helmet } from 'react-helmet-async';
+import { getFinelLetter, getNormalLetter } from '~/helpers/getLetter';
 
 interface Props {
   title: string;
@@ -68,7 +69,9 @@ const Guess: React.FC<Props> = ({ title, description, letters, guess }) => {
             ? 'bg-white border-2'
             : guess[i] === currentWord[i]
             ? 'bg-green-400 border-0'
-            : currentWord.includes(guess[i])
+            : currentWord.includes(guess[i]) ||
+              currentWord.includes(getFinelLetter(guess[i])) ||
+              currentWord.includes(getNormalLetter(guess[i]))
             ? 'bg-yellow-400 border-0'
             : 'bg-gray-500 text-white border-0';
 

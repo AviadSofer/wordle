@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useCurrentWord } from '~/contexts/CurrentWord';
 import { useError } from '~/contexts/Error';
 import { useGuesses } from '~/contexts/Guesses';
-import getFinelLetter from '~/helpers/getFinelLetter';
+import { getFinelLetter } from '~/helpers/getLetter';
 import hebrewLetters from '~/static/hebrewLetters';
 import allWords from '~/static/allWords';
 import Letter from './Letter';
