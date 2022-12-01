@@ -31,7 +31,7 @@ const WordsByLenght: React.FC = () => {
           כנסו למשחק
         </Link>
       </h2>
-      <div className='mx-auto flex w-1/2 flex-wrap justify-center gap-2'>
+      <div className='mx-auto flex w-full flex-wrap justify-center gap-2 md:w-1/2'>
         {wordList.map((word, i) => (
           <div
             key={i}
