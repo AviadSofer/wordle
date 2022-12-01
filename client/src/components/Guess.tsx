@@ -4,24 +4,22 @@ import { useGuesses } from '~/contexts/Guesses';
 import getRandomWord from '~/helpers/getRandomWord';
 import { useParams } from 'react-router-dom';
 import { decodeString } from '~/helpers/encode';
+import { Helmet } from 'react-helmet-async';
 
 interface Props {
   title: string;
+  description: string;
   guess: string;
   letters?: number;
 }
 
-const Guess: React.FC<Props> = ({ title, letters, guess }) => {
+const Guess: React.FC<Props> = ({ title, description, letters, guess }) => {
   const [boxSize, setBoxSize] = useState('');
 
   const { currentWord, setCurrentWord } = useCurrentWord();
   const { setGuesses } = useGuesses();
 
   const { id } = useParams();
-
-  useEffect(() => {
-    document.title = title;
-  }, [title]);
 
   useEffect(() => {
     if (letters) {
@@ -59,6 +57,11 @@ const Guess: React.FC<Props> = ({ title, letters, guess }) => {
       style={{ gridTemplateColumns: `repeat(${currentWord.length}, minmax(0, 1fr))` }}
       className='grid gap-x-1.5'
     >
+      <Helmet>
+        <title>{title}</title>
+        <meta name='description' content={description} />
+      </Helmet>
+
       {new Array(currentWord.length).fill(0).map((_, i) => {
         const bgColor =
           guess.length !== currentWord.length + 2

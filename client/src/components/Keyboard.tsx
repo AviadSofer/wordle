@@ -7,11 +7,13 @@ import hebrewLetters from '~/static/hebrewLetters';
 import allWords from '~/static/allWords';
 import Letter from './Letter';
 import { useLocation } from 'react-router-dom';
+import { useCurrentLevel } from '~/contexts/currentLevel';
 
 const Keyboard: React.FC = () => {
   const { guesses, setGuesses } = useGuesses();
   const { currentWord } = useCurrentWord();
   const { setIsError, setErrorMsg } = useError();
+  const { currentLevel } = useCurrentLevel();
 
   const location = useLocation();
 
@@ -33,7 +35,11 @@ const Keyboard: React.FC = () => {
 
             // Enter in the end
           } else if (key === 'Enter' && guess.length === currentWord.length) {
-            if (allWords.includes(guess) || location.pathname.includes('word')) {
+            if (
+              allWords.includes(guess) ||
+              location.pathname.includes('word') ||
+              currentLevel === 'easy'
+            ) {
               return `${guess}OK`;
             } else {
               setIsError(true);
@@ -89,26 +95,29 @@ const Keyboard: React.FC = () => {
     };
   }, [currentWord, guesses, setGuesses]);
 
-  const firstRow = ['OK', 'D', 'פ', 'ו', 'ט', 'א', 'ר', 'ק'];
+  const firstRow = ['D', 'פ', 'ו', 'ט', 'א', 'ר', 'ק'];
   const secondRow = ['ל', 'ח', 'י', 'ע', 'כ', 'ג', 'ד', 'ש'];
   const thirdRow = ['ת', 'צ', 'מ', 'נ', 'ה', 'ב', 'ס', 'ז'];
 
   return (
-    <div className='flex flex-col items-end gap-y-1.5 md:gap-y-1'>
-      <div className='flex gap-x-1.5 md:gap-x-1'>
-        {firstRow.map((letter, i) => (
-          <Letter key={i}>{letter}</Letter>
-        ))}
-      </div>
-      <div className='flex gap-x-1.5 md:gap-x-1'>
-        {secondRow.map((letter, i) => (
-          <Letter key={i}>{letter}</Letter>
-        ))}
-      </div>
-      <div className='flex gap-x-1.5 md:gap-x-1'>
-        {thirdRow.map((letter, i) => (
-          <Letter key={i}>{letter}</Letter>
-        ))}
+    <div className='flex gap-x-1'>
+      <Letter>{'OK'}</Letter>
+      <div className='flex flex-col items-start gap-y-1.5 md:gap-y-1'>
+        <div className='flex gap-x-1.5 md:gap-x-1'>
+          {firstRow.map((letter, i) => (
+            <Letter key={i}>{letter}</Letter>
+          ))}
+        </div>
+        <div className='flex gap-x-1.5 md:gap-x-1'>
+          {secondRow.map((letter, i) => (
+            <Letter key={i}>{letter}</Letter>
+          ))}
+        </div>
+        <div className='flex gap-x-1.5 md:gap-x-1'>
+          {thirdRow.map((letter, i) => (
+            <Letter key={i}>{letter}</Letter>
+          ))}
+        </div>
       </div>
     </div>
   );

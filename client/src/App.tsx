@@ -7,7 +7,7 @@ const App: React.FC = () => {
   return (
     <div
       style={{ height: innerHeight }}
-      className='relative flex h-screen flex-col items-center justify-between px-2 py-7 md:gap-y-6 md:py-5'
+      className='relative flex h-screen flex-col items-center justify-between px-2 py-7 md:gap-y-3 md:py-3'
     >
       <Header />
       <GuessesGrid />

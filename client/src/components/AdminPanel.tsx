@@ -52,7 +52,7 @@ const AdminPanel: React.FC = () => {
   };
 
   return (
-    <div className='fixed top-0 left-0 flex h-full w-full items-center justify-center bg-red-200'>
+    <div className='flex h-screen w-full items-center justify-center bg-red-200'>
       <div className='flex min-h-[50%] w-5/6 flex-col items-center rounded-md bg-white text-center shadow-md md:w-1/3'>
         <h1 className='py-5 text-lg font-semibold text-font'>רשימת מילים פוגעניות</h1>
 

@@ -1,9 +1,10 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { decodeString } from '~/helpers/encode';
 import { useState, useEffect } from 'react';
 
 const Hint: React.FC = () => {
   const { id } = useParams();
+
   const [hint, setHint] = useState('');
   const [display, setDisplay] = useState('flex');
 
@@ -19,11 +20,21 @@ const Hint: React.FC = () => {
   }, [id]);
 
   return (
-    <div
-      className={`fixed top-6 right-0 left-0 mx-auto flex h-20 w-full flex-col items-center justify-center bg-white md:w-1/2`}
-    >
-      <h1 className='pb-2 text-2xl font-bold text-font'>מילה מותאמת אישית</h1>
-      <h2 className={`${display} text-xl font-medium text-font`}>{`רמז: ${hint}`}</h2>
+    <div className={`mx-auto flex flex-col items-center justify-center bg-white`}>
+      <h1 className='pb-1.5 text-xl font-bold text-font'>נחשו את המילה ששלחתי - מילהלה</h1>
+      <h2 className={`${display} text-lg font-medium text-font`}>{`רמז: ${hint}`}</h2>
+      <div className='flex gap-1 pt-2'>
+        <Link to={'/'}>
+          <button className='h-10 w-36 rounded-md bg-green-500 text-sm font-medium text-white hover:bg-green-700'>
+            שחקו במילים אחרות
+          </button>
+        </Link>
+        <Link to={'/create-new-word'}>
+          <button className='h-10 w-36 rounded-md bg-gray-500 text-sm font-medium text-white hover:bg-gray-600'>
+            צרו מילה בעצמכם
+          </button>
+        </Link>
+      </div>
     </div>
   );
 };

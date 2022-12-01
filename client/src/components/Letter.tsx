@@ -6,6 +6,7 @@ import allWords from '~/static/allWords';
 import { useError } from '~/contexts/Error';
 import { useEffect, useState } from 'react';
 import getFinelLetter from '~/helpers/getFinelLetter';
+import { useCurrentLevel } from '~/contexts/currentLevel';
 
 interface Props {
   children: React.ReactNode;
@@ -15,6 +16,7 @@ const Letter: React.FC<Props> = ({ children }) => {
   const { guesses, setGuesses } = useGuesses();
   const { currentWord } = useCurrentWord();
   const { setIsError, setErrorMsg } = useError();
+  const { currentLevel } = useCurrentLevel();
 
   const [bgColor, setBgColor] = useState('bg-gray-300 text-font');
 
@@ -56,7 +58,11 @@ const Letter: React.FC<Props> = ({ children }) => {
 
           // OK button in the end
         } else if (children === 'OK' && guess.length === currentWord.length) {
-          if (allWords.includes(guess) || location.pathname.includes('word')) {
+          if (
+            allWords.includes(guess) ||
+            location.pathname.includes('word') ||
+            currentLevel === 'easy'
+          ) {
             return `${guess}OK`;
           } else {
             setIsError(true);
@@ -85,11 +91,11 @@ const Letter: React.FC<Props> = ({ children }) => {
 
   let key;
   if (children === 'D') {
-    key = <FiDelete className='mx-2 mt-0.5 w-10' />;
+    key = <FiDelete className='mx-[14px] mt-0.5 block w-10' />;
   } else if (children === 'OK') {
     key = (
       <div className='flex flex-col items-center'>
-        <span className='text-xs font-semibold text-font'>אישור</span>
+        <span className='text-xs font-bold text-font'>אישור</span>
         <AiOutlineEnter className='mx-2 mt-0.5 w-10' />
       </div>
     );
@@ -99,7 +105,9 @@ const Letter: React.FC<Props> = ({ children }) => {
 
   return (
     <div
-      className={`${bgColor} flex h-11 min-w-[2rem] cursor-pointer items-center justify-center rounded-sm text-lg font-bold`}
+      className={`${bgColor} flex ${
+        children === 'OK' ? 'h-full' : 'h-11'
+      } min-w-[2rem] cursor-pointer items-center justify-center rounded-sm text-lg font-bold`}
       onClick={clickHandle}
       aria-hidden='true'
     >
