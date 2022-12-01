@@ -35,6 +35,12 @@ const Hint: React.FC = () => {
           </button>
         </Link>
       </div>
+      <span
+        className='mt-1 cursor-pointer text-base font-medium text-font underline'
+        onClick={() => window.open('mailto:yogevper@gmail.com', '_blank')}
+      >
+        דיווח על מילה
+      </span>
     </div>
   );
 };

@@ -53,6 +53,7 @@ const CreateWord: React.FC = () => {
     let { value } = e.target;
     value = value.slice(0, 11);
     if (hebrewLetters.includes(`${[...value].pop()}`) || value === '') {
+      // const withFinelLetter = 'ךםןףץ'.includes(`${[...value].pop()}`);
       setWord(value);
     }
   };
@@ -97,7 +98,7 @@ const CreateWord: React.FC = () => {
 
       <h2 className='hidden pr-1 text-sm font-semibold md:block'>שלחו מילה לחברים</h2>
       <Link to={'/create-new-word'}>
-        <button className='relative top-[-2px] rounded-lg bg-blue-800 px-5 py-[6px] text-lg font-medium text-white hover:bg-blue-900'>
+        <button className='relative top-[-2px] rounded-lg bg-blue-800 px-5 py-[6px] text-base font-medium text-white hover:bg-blue-900 md:text-lg'>
           צרו מילה
         </button>
       </Link>
@@ -106,7 +107,7 @@ const CreateWord: React.FC = () => {
         <Route
           path={'/create-new-word'}
           element={
-            <div className={`fixed top-0 right-0 flex h-full w-full bg-gray-50`}>
+            <div className={`fixed top-0 right-0 flex h-full w-full bg-white`}>
               <Helmet>
                 <title>{'יצירת משחק מילים בעברית - מחולל משחק מילים - מילהלה'}</title>
                 <meta
@@ -116,29 +117,37 @@ const CreateWord: React.FC = () => {
                   }
                 />
               </Helmet>
-              <div className='relative mx-auto my-auto flex w-5/6 flex-col items-center rounded-md bg-white py-5 shadow-2xl md:h-1/2 md:w-[35%]'>
+
+              <div className='relative mx-auto flex w-5/6 flex-col items-center rounded-md bg-white py-5 md:w-[45%]'>
+                <h1 className='mt-10 text-xl font-semibold text-font underline'>
+                  יצירת משחק מילים בעברית - מילהלה
+                </h1>
+
                 <Link to={'/'}>
-                  <IoClose className='absolute right-9 top-6 cursor-pointer' size={25} />
+                  <IoClose
+                    className='absolute right-1 top-6 cursor-pointer md:right-14'
+                    size={25}
+                  />
                 </Link>
 
-                <h1 className='text-2xl font-bold text-font'>מילה חדשה</h1>
+                <h1 className='pt-5 text-2xl font-bold text-font'>יצירת משחק מילים</h1>
 
-                <label htmlFor='hint' className='mt-7 text-xl font-medium text-font'>
-                  רמז (לא חובה)
-                </label>
-                <input
-                  type='text'
-                  onChange={(e) => setHint(e.target.value)}
-                  className='w-5/6 border-b-2 border-gray-500 bg-transparent text-lg focus:border-blue-600 focus:outline-none'
-                />
-
-                <label htmlFor='hint' className='mt-5 text-xl font-medium text-font'>
+                <label htmlFor='hint' className='mt-2 text-xl font-medium text-font'>
                   מילה
                 </label>
                 <input
                   type='text'
                   value={word}
                   onChange={onWordChange}
+                  className='w-5/6 border-b-2 border-gray-500 bg-transparent text-lg focus:border-blue-600 focus:outline-none'
+                />
+
+                <label htmlFor='hint' className='mt-5 text-xl font-medium text-font'>
+                  רמז (לא חובה)
+                </label>
+                <input
+                  type='text'
+                  onChange={(e) => setHint(e.target.value)}
                   className='w-5/6 border-b-2 border-gray-500 bg-transparent text-lg focus:border-blue-600 focus:outline-none'
                 />
 
@@ -186,6 +195,23 @@ const CreateWord: React.FC = () => {
                       התחל משחק
                     </button>
                   </Link>
+                </div>
+
+                <h1 className='pt-8 pb-3 text-2xl font-bold text-font'>שחקו במילים מוכנות</h1>
+
+                <div className='flex md:gap-3'>
+                  {new Array(8).fill(0).map((_, i) => (
+                    <Link key={i} to={`/${i + 4}-letters`}>
+                      <div
+                        className={`mx-1 h-10 w-10 cursor-pointer items-center justify-center rounded-lg text-lg md:mx-0 ${
+                          i < 4 ? 'flex' : 'hidden md:flex'
+                        } ${i + 4 === 5 ? 'bg-green-500 text-white' : 'bg-blue-50 text-font'}`}
+                        aria-hidden='true'
+                      >
+                        {i + 4}
+                      </div>
+                    </Link>
+                  ))}
                 </div>
               </div>
             </div>
