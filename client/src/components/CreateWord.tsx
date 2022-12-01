@@ -6,7 +6,7 @@ import { BsShareFill } from 'react-icons/bs';
 import { AiOutlineWhatsApp } from 'react-icons/ai';
 import hebrewLetters from '~/static/hebrewLetters';
 import Info from './Info';
-import getOffensiveWords from '../api/getOffensiveWords';
+// import getOffensiveWords from '../api/getOffensiveWords';
 import { Helmet } from 'react-helmet-async';
 
 interface Word {
@@ -30,6 +30,7 @@ const CreateWord: React.FC = () => {
     (async () => {
       // const offensiveWords = await getOffensiveWords();
       // setWordList(offensiveWords);
+      setWordList([{ word: '' }]);
 
       // Handeling showErr
       if (word.length > 0 && word.length < 4) {
