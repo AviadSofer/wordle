@@ -51,11 +51,38 @@ const GameOverMessage: React.FC = () => {
           <Route path='/word/:id' element={<ReportWord />} />
         </Routes>
 
-        <Link to={'/'}>
-          <button onClick={newGameHandle} className='rounded-md bg-white py-1.5 px-7 text-font'>
-            משחק חדש
-          </button>
-        </Link>
+        <Routes>
+          {new Array(8).fill(0).map((_, i) => (
+            <Route
+              key={i}
+              path={`/${i + 4}-letters`}
+              element={
+                <Link to={`/${i + 4}-letters`}>
+                  <button
+                    onClick={newGameHandle}
+                    className='rounded-md bg-white py-1.5 px-7 text-font'
+                  >
+                    משחק חדש
+                  </button>
+                </Link>
+              }
+            />
+          ))}
+
+          <Route
+            path={`/*`}
+            element={
+              <Link to={'/'}>
+                <button
+                  onClick={newGameHandle}
+                  className='rounded-md bg-white py-1.5 px-7 text-font'
+                >
+                  משחק חדש
+                </button>
+              </Link>
+            }
+          />
+        </Routes>
       </div>
     </div>
   );

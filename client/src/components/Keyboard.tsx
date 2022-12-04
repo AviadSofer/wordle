@@ -28,26 +28,7 @@ const Keyboard: React.FC = () => {
           i === guesses.findIndex((item) => item.length < currentWord.length + 2) &&
           !targetElement.tagName.toLowerCase().includes('input')
         ) {
-          // Just Enter
-          if (key === 'Enter' && guess.length < currentWord.length) {
-            setIsError(true);
-            setErrorMsg('אין מספיק אותיות!');
-
-            // Enter in the end
-          } else if (key === 'Enter' && guess.length === currentWord.length) {
-            if (
-              allWords.includes(guess) ||
-              location.pathname.includes('word') ||
-              currentLevel === 'easy'
-            ) {
-              return `${guess}OK`;
-            } else {
-              setIsError(true);
-              setErrorMsg('מילה לא תקנית!');
-            }
-
-            // Make finel letters
-          } else if (hebrewLetters.includes(key) && guess.length === currentWord.length - 1) {
+          if (hebrewLetters.includes(key) && guess.length === currentWord.length - 1) {
             return `${guess}${getFinelLetter(`${key}`)}`;
 
             // Rest of the cases
@@ -75,13 +56,38 @@ const Keyboard: React.FC = () => {
   useEffect(() => {
     const checkKeyDown = (e: KeyboardEvent) => {
       const { key } = e;
+      const targetElement = e.target as HTMLElement;
 
       const newGuesses = guesses.map((guess, i) => {
         if (
           i === guesses.findIndex((item) => item.length < currentWord.length + 2) &&
-          key === 'Backspace'
+          !targetElement.tagName.toLowerCase().includes('input')
         ) {
-          return guess.slice(0, -1);
+          // Just Enter
+          if (key === 'Enter' && guess.length < currentWord.length) {
+            console.log(guess.length, currentWord.length);
+            setIsError(true);
+            setErrorMsg('אין מספיק אותיות!');
+
+            // Enter in the end
+          } else if (key === 'Enter' && guess.length === currentWord.length) {
+            if (
+              allWords.includes(guess) ||
+              location.pathname.includes('word') ||
+              currentLevel === 'easy'
+            ) {
+              return `${guess}OK`;
+            } else {
+              setIsError(true);
+              setErrorMsg('מילה לא תקנית!');
+            }
+            // Backspace
+          } else if (
+            i === guesses.findIndex((item) => item.length < currentWord.length + 2) &&
+            key === 'Backspace'
+          ) {
+            return guess.slice(0, -1);
+          }
         }
         return guess;
       });
@@ -93,7 +99,7 @@ const Keyboard: React.FC = () => {
     return () => {
       window.removeEventListener('keydown', checkKeyDown);
     };
-  }, [currentWord, guesses, setGuesses]);
+  }, [guesses]);
 
   const firstRow = ['D', 'פ', 'ו', 'ט', 'א', 'ר', 'ק'];
   const secondRow = ['ל', 'ח', 'י', 'ע', 'כ', 'ג', 'ד', 'ש'];
