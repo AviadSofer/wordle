@@ -2,7 +2,8 @@ import { useCurrentWord } from '~/contexts/CurrentWord';
 import { useGuesses } from '~/contexts/Guesses';
 import { useState, useEffect } from 'react';
 import getRandomWord from '~/helpers/getRandomWord';
-import { Link } from 'react-router-dom';
+import { Link, Route, Routes } from 'react-router-dom';
+import ReportWord from './ReportWord';
 
 const GameOverMessage: React.FC = () => {
   const { guesses, setGuesses } = useGuesses();
@@ -43,7 +44,13 @@ const GameOverMessage: React.FC = () => {
         className={`${bgColor} flex h-2/5 w-11/12 flex-col items-center justify-center gap-7 rounded-md shadow-2xl md:w-1/3`}
       >
         <h1 className='text-4xl font-bold text-white'>{msg}</h1>
+
         <h2 className='text-2xl font-bold text-white'>המילה הנכונה: {currentWord}</h2>
+
+        <Routes>
+          <Route path='/word/:id' element={<ReportWord />} />
+        </Routes>
+
         <Link to={'/'}>
           <button onClick={newGameHandle} className='rounded-md bg-white py-1.5 px-7 text-font'>
             משחק חדש

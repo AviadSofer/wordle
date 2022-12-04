@@ -32,7 +32,7 @@ const ReportWord: React.FC = () => {
   return (
     <div className='relative'>
       <span
-        className='cursor-pointer text-base font-medium text-font underline'
+        className='cursor-pointer text-lg font-semibold text-white underline'
         onClick={onClickHandle}
       >
         דיווח על מילה
