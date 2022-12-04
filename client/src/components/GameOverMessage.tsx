@@ -30,9 +30,9 @@ const GameOverMessage: React.FC = () => {
     });
   }, [guesses, currentWord]);
 
-  const newGameHandle = () => {
+  const newGameHandle = (letters: number) => {
     setDisplay('hidden');
-    setCurrentWord(getRandomWord(5));
+    setCurrentWord(getRandomWord(letters));
     setGuesses(new Array(6).fill(''));
   };
 
@@ -59,7 +59,7 @@ const GameOverMessage: React.FC = () => {
               element={
                 <Link to={`/${i + 4}-letters`}>
                   <button
-                    onClick={newGameHandle}
+                    onClick={() => newGameHandle(i + 4)}
                     className='rounded-md bg-white py-1.5 px-7 text-font'
                   >
                     משחק חדש
@@ -74,7 +74,7 @@ const GameOverMessage: React.FC = () => {
             element={
               <Link to={'/'}>
                 <button
-                  onClick={newGameHandle}
+                  onClick={() => newGameHandle(5)}
                   className='rounded-md bg-white py-1.5 px-7 text-font'
                 >
                   משחק חדש
