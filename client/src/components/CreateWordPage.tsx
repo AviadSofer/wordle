@@ -5,7 +5,7 @@ import { IoClose } from 'react-icons/io5';
 import { BsShareFill } from 'react-icons/bs';
 import { AiOutlineWhatsApp } from 'react-icons/ai';
 import hebrewLetters from '~/static/hebrewLetters';
-// import getOffensiveWords from '../api/getOffensiveWords';
+import fetchWordsList from '../api/fetchWordsList';
 import { Helmet } from 'react-helmet-async';
 
 interface Word {
@@ -27,24 +27,25 @@ const CreateWordPage: React.FC = () => {
 
   useEffect(() => {
     (async () => {
-      // const offensiveWords = await getOffensiveWords();
-      // setWordList(offensiveWords);
-      setWordList([{ word: 'מניאק' }]);
-
-      // Handeling showErr
-      if (word.length > 0 && word.length < 4) {
-        setErrMsg('בין 4 ל11 אותיות');
-        setShowErr(true);
-      } else if ([...'ךםןףץ'].some((letter) => word.slice(0, word.length - 1).includes(letter))) {
-        setErrMsg('אות סופית יכולה להיות רק באמצע מילה');
-        setShowErr(true);
-      } else if (wordsList.find((e) => e.word === word)) {
-        setErrMsg('מילה פוגענית');
-        setShowErr(true);
-      } else {
-        setShowErr(false);
-      }
+      const offensiveWords = await fetchWordsList('/api/get-offensive-words');
+      setWordList(offensiveWords);
     })();
+  }, []);
+
+  useEffect(() => {
+    // Handeling showErr
+    if (word.length > 0 && word.length < 4) {
+      setErrMsg('בין 4 ל11 אותיות');
+      setShowErr(true);
+    } else if ([...'ךםןףץ'].some((letter) => word.slice(0, word.length - 1).includes(letter))) {
+      setErrMsg('אות סופית יכולה להיות רק באמצע מילה');
+      setShowErr(true);
+    } else if (wordsList.find((e) => e.word === word)) {
+      setErrMsg('מילה פוגענית');
+      setShowErr(true);
+    } else {
+      setShowErr(false);
+    }
   }, [word]);
 
   useEffect(() => {

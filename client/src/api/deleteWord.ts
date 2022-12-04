@@ -1,5 +1,5 @@
-const deleteWord = async (word: string) =>
-  fetch('/api/get-offensive-words', {
+const deleteWord = async (url: string, word: string) =>
+  fetch(url, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',

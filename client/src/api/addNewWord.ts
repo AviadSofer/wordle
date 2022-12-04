@@ -1,5 +1,5 @@
-const addNewWord = async (word: string) =>
-  fetch('/api/get-offensive-words', {
+const addNewWord = async (url: string, word: string) =>
+  fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

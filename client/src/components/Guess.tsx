@@ -78,7 +78,7 @@ const Guess: React.FC<Props> = ({ title, description, letters, guess }) => {
         return (
           <div
             key={i}
-            className={`flex ${boxSize} ${bgColor} items-center justify-center rounded-md border-gray-300 font-bold md:h-12 md:w-12`}
+            className={`flex ${boxSize} ${bgColor} items-center justify-center rounded-md border-gray-300 font-bold md:h-11 md:w-11`}
           >
             {guess[i]}
           </div>
