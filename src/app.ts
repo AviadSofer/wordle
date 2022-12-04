@@ -1,8 +1,8 @@
 import express, { Application } from 'express';
 import path from 'path';
 import dbConnect from './helpers/dbConnect';
-// import getOffensiveWords from './routes/api/getOffensiveWords';
-// import getReportedWords from './routes/api/getReportedWords';
+import getOffensiveWords from './routes/api/getOffensiveWords';
+import getReportedWords from './routes/api/getReportedWords';
 
 const app: Application = express();
 
@@ -10,12 +10,12 @@ const app: Application = express();
 const port = process.env.PORT || 5000;
 
 // Connect to the DB
-// dbConnect();
+dbConnect();
 
 // Add routes
 app.use(express.json());
-// app.use('/api/get-offensive-words', getOffensiveWords);
-// app.use('/api/get-reported-words', getReportedWords);
+app.use('/api/get-offensive-words', getOffensiveWords);
+app.use('/api/get-reported-words', getReportedWords);
 
 // Serve the client
 app.use(express.static(path.join(path.resolve(), 'client', 'dist')));
