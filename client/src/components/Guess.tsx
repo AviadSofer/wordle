@@ -15,8 +15,13 @@ interface Props {
   letters?: number;
 }
 
+interface Word {
+  word: string;
+}
+
 const Guess: React.FC<Props> = ({ title, description, letters, guess }) => {
   const [boxSize, setBoxSize] = useState('');
+  const [offensiveWords, setOffensiveWords] = useState<Word[]>([{ word: '' }]);
 
   const { currentWord, setCurrentWord } = useCurrentWord();
   const { setGuesses } = useGuesses();
@@ -30,25 +35,23 @@ const Guess: React.FC<Props> = ({ title, description, letters, guess }) => {
     }
   }, [letters, setCurrentWord, setGuesses]);
 
-  interface Word {
-    word: string;
-  }
-
   useEffect(() => {
     (async () => {
-      if (id) {
-        const decodedUrl = decodeString(id);
-        const newCurrentWord = decodedUrl.split(',')[1];
-
-        const offensiveWords: Word[] = await fetchWordsList('/api/get-offensive-words');
-
-        if (offensiveWords.some((i) => i.word === newCurrentWord)) {
-          location.href = '/';
-        } else {
-          setCurrentWord(newCurrentWord);
-        }
-      }
+      setOffensiveWords(await fetchWordsList('/api/get-offensive-words'));
     })();
+  }, []);
+
+  useEffect(() => {
+    if (id) {
+      const decodedUrl = decodeString(id);
+      const newCurrentWord = decodedUrl.split(',')[1];
+
+      if (offensiveWords.some((i) => i.word === newCurrentWord)) {
+        location.href = '/';
+      } else {
+        setCurrentWord(newCurrentWord);
+      }
+    }
   }, [id]);
 
   useEffect(() => {
