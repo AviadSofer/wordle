@@ -101,7 +101,7 @@ const CreateWordPage: React.FC = () => {
   return (
     <>
       <div className={`w-ful flex h-full`}>
-        <Helmet>
+        <Helmet prioritizeSeoTags>
           <title>{'יצירת משחק מילים בעברית - מחולל משחק מילים - מילהלה'}</title>
           <meta
             name='description'

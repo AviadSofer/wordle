@@ -21,7 +21,7 @@ const WordsByLenght: React.FC = () => {
   return (
     <>
       <div className='py-7'>
-        <Helmet>
+        <Helmet prioritizeSeoTags>
           <title>{`מילים עם ${id} אותיות`}</title>
         </Helmet>
 

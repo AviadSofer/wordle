@@ -15,7 +15,9 @@ const Header: React.FC = () => {
   const { currentWord } = useCurrentWord();
 
   useEffect(() => {
-    setTitle(document.title);
+    if (document.title) {
+      setTitle(document.title);
+    }
   }, [document.title]);
 
   useEffect(() => {
@@ -34,7 +36,7 @@ const Header: React.FC = () => {
 
             <div
               className={`${
-                navWindow ? 'pt-7' : 'pt-3 md:pt-0'
+                navWindow ? 'pt-7' : 'pt-0 md:pt-0'
               } flex w-full items-center justify-between px-5 md:w-auto md:gap-x-10`}
             >
               <div className='cursor-pointer font-bold text-font hover:text-blue-700 md:hidden'>

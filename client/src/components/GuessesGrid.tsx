@@ -10,9 +10,7 @@ const GuessesGrid: React.FC = () => {
 
   return (
     <div
-      className={`grid py-10 md:py-0 ${
-        currentWord.length > 6 ? 'gap-y-2.5' : 'gap-y-1.5'
-      } md:gap-y-1.5`}
+      className={`grid md:py-0 ${currentWord.length > 6 ? 'gap-y-2.5' : 'gap-y-1.5'} md:gap-y-1.5`}
     >
       <ErrorMessage />
       <Routes>

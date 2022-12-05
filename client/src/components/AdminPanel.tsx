@@ -69,8 +69,8 @@ const AdminPanel: React.FC = () => {
   };
 
   return (
-    <div className='flex h-screen w-full items-center justify-center bg-red-200'>
-      <div className='flex min-h-[50%] w-full flex-col items-center rounded-md bg-white py-4 text-center shadow-md md:w-auto md:px-32'>
+    <div className='flex h-screen w-full justify-center bg-red-200'>
+      <div className='flex w-full flex-col items-center rounded-md bg-white py-4 text-center shadow-md md:w-auto md:px-32'>
         <h1 className='py-3 text-lg font-bold text-font'>רשימת מילים פוגעניות</h1>
 
         {showLists ? (
@@ -135,7 +135,7 @@ const AdminPanel: React.FC = () => {
         ) : (
           <input
             onChange={(e) =>
-              e.target.value === 'oslo1994' ? setShowLists(true) : setShowLists(false)
+              e.target.value === 'yogev1234' ? setShowLists(true) : setShowLists(false)
             }
             type='password'
             placeholder='סיסמה'

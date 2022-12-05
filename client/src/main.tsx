@@ -27,7 +27,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                 <Routes>
                   <Route path='/*' element={<App />} />
                   <Route path='/create-new-word' element={<CreateWordPage />} />
-                  <Route path='/admin' element={<AdminPanel />} />
+                  <Route path='/adminyyyy' element={<AdminPanel />} />
                   <Route path='/all-words/:id' element={<WordsByLenght />} />
                 </Routes>
               </CurrentLevel>

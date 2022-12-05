@@ -72,7 +72,7 @@ const Guess: React.FC<Props> = ({ title, description, letters, guess }) => {
       style={{ gridTemplateColumns: `repeat(${currentWord.length}, minmax(0, 1fr))` }}
       className='grid gap-x-1.5'
     >
-      <Helmet>
+      <Helmet prioritizeSeoTags>
         <title>{title}</title>
         <meta name='description' content={description} />
       </Helmet>

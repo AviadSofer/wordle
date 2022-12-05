@@ -12,7 +12,7 @@ const CreateWordButton: React.FC = () => {
 
       <Link to={'/create-new-word'}>
         <button className='rounded-lg bg-blue-800 px-5 py-2 text-base font-medium text-white hover:bg-blue-900 md:py-[6px] md:text-lg'>
-          צרו מילה
+          {window.matchMedia('(min-width: 769px)').matches ? 'צרו מילה' : 'צרו'}
         </button>
       </Link>
     </div>
