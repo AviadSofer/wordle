@@ -16,6 +16,8 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
       res.status(201).json(results);
     }
   });
+
+  dbConnect().end();
 });
 
 // Create word by req
@@ -32,6 +34,8 @@ router.post('/', async (req: Request, res: Response, next: NextFunction) => {
       });
     }
   });
+
+  dbConnect().end();
 });
 
 // Delete word by req
@@ -48,6 +52,8 @@ router.delete('/', async (req: Request, res: Response, next: NextFunction) => {
       });
     }
   });
+
+  dbConnect().end();
 });
 
 export default router;
