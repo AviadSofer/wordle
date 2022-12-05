@@ -26,10 +26,7 @@ const Footer: React.FC = () => {
         <h1 className='font-semibold'>רשימת מילים:</h1>
         {new Array(8).fill('').map((_, i) => (
           <>
-            <Link
-              to={`/all-words/${i + 4}-letter`}
-              className='cursor-pointer text-blue-600 underline'
-            >
+            <Link to={`/all-words/${i + 4}`} className='cursor-pointer text-blue-600 underline'>
               רשימת מילים באורך {i + 4} אותיות
             </Link>
             {i + 4 !== 11 ? <span> | </span> : <></>}
