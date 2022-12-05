@@ -10,7 +10,7 @@ import Info from './Info';
 
 const Header: React.FC = () => {
   const [navWindow, setNavWindow] = useState(false);
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState('מילהלה - משחק מילים בעברית עם 5 אותיות');
 
   const { currentWord } = useCurrentWord();
 

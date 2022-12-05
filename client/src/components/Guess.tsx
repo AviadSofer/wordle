@@ -17,7 +17,6 @@ interface Props {
 
 const Guess: React.FC<Props> = ({ title, description, letters, guess }) => {
   const [boxSize, setBoxSize] = useState('');
-  const [notAvailableDisplay, setNotAvailableDisplay] = useState('hidden');
 
   const { currentWord, setCurrentWord } = useCurrentWord();
   const { setGuesses } = useGuesses();
@@ -44,9 +43,10 @@ const Guess: React.FC<Props> = ({ title, description, letters, guess }) => {
         const offensiveWords: Word[] = await fetchWordsList('/api/get-offensive-words');
 
         if (offensiveWords.some((i) => i.word === newCurrentWord)) {
-          setNotAvailableDisplay('flex');
+          location.href = '/';
+        } else {
+          setCurrentWord(newCurrentWord);
         }
-        setCurrentWord(newCurrentWord);
       }
     })();
   }, [id]);
@@ -76,12 +76,6 @@ const Guess: React.FC<Props> = ({ title, description, letters, guess }) => {
         <title>{title}</title>
         <meta name='description' content={description} />
       </Helmet>
-
-      <div
-        className={`${notAvailableDisplay} fixed top-0 left-0 flex h-screen w-full items-center justify-center bg-red-500`}
-      >
-        <h1 className='text-xl font-bold text-white md:text-5xl'>מילה פוגענית לא זמינה</h1>
-      </div>
 
       {new Array(currentWord.length).fill(0).map((_, i) => {
         const bgColor =

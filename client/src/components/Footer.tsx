@@ -12,72 +12,29 @@ const Footer: React.FC = () => {
 
       <div className='mt-1 text-sm font-medium text-font'>
         <h1 className='font-semibold'> לפי אורך אותיות:</h1>
-        <Link to={'/4-letters'} className='cursor-pointer text-blue-600 underline'>
-          משחק עם 4 אותיות
-        </Link>{' '}
-        |{' '}
-        <Link to={'/5-letters'} className='cursor-pointer text-blue-600 underline'>
-          משחק עם 5 אותיות
-        </Link>{' '}
-        |{' '}
-        <Link to={'/6-letters'} className='cursor-pointer text-blue-600 underline'>
-          משחק עם 6 אותיות
-        </Link>{' '}
-        |{' '}
-        <Link to={'/7-letters'} className='cursor-pointer text-blue-600 underline'>
-          משחק עם 7 אותיות
-        </Link>{' '}
-        |{' '}
-        <Link to={'/8-letters'} className='cursor-pointer text-blue-600 underline'>
-          משחק עם 8 אותיות
-        </Link>{' '}
-        |{' '}
-        <Link to={'/9-letters'} className='cursor-pointer text-blue-600 underline'>
-          משחק עם 9 אותיות
-        </Link>{' '}
-        |{' '}
-        <Link to={'/10-letters'} className='cursor-pointer text-blue-600 underline'>
-          משחק עם 10 אותיות
-        </Link>{' '}
-        |{' '}
-        <Link to={'/11-letters'} className='cursor-pointer text-blue-600 underline'>
-          משחק עם 11 אותיות
-        </Link>
+        {new Array(8).fill('').map((_, i) => (
+          <>
+            <Link to={`/${i + 4}-letter`} className='cursor-pointer text-blue-600 underline'>
+              משחק עם {i + 4} אותיות
+            </Link>
+            {i + 4 !== 11 ? <span> | </span> : <></>}
+          </>
+        ))}
       </div>
 
       <div className='mt-1 text-sm font-medium text-font'>
         <h1 className='font-semibold'>רשימת מילים:</h1>
-        <Link to={'/all-words/4'} className='cursor-pointer text-blue-600 underline'>
-          רשימת מילים באורך 4 אותיות
-        </Link>{' '}
-        |{' '}
-        <Link to={'/all-words/5'} className='cursor-pointer text-blue-600 underline'>
-          רשימת מילים באורך 5 אותיות
-        </Link>{' '}
-        |{' '}
-        <Link to={'/all-words/6'} className='cursor-pointer text-blue-600 underline'>
-          רשימת מילים באורך 6 אותיות
-        </Link>{' '}
-        |{' '}
-        <Link to={'/all-words/7'} className='cursor-pointer text-blue-600 underline'>
-          רשימת מילים באורך 7 אותיות
-        </Link>{' '}
-        |{' '}
-        <Link to={'/all-words/8'} className='cursor-pointer text-blue-600 underline'>
-          רשימת מילים באורך 8 אותיות
-        </Link>{' '}
-        |{' '}
-        <Link to={'/all-words/9'} className='cursor-pointer text-blue-600 underline'>
-          רשימת מילים באורך 9 אותיות
-        </Link>{' '}
-        |{' '}
-        <Link to={'/all-words/10'} className='cursor-pointer text-blue-600 underline'>
-          רשימת מילים באורך 10 אותיות
-        </Link>{' '}
-        |{' '}
-        <Link to={'/all-words/11'} className='cursor-pointer text-blue-600 underline'>
-          רשימת מילים באורך 11 אותיות
-        </Link>
+        {new Array(8).fill('').map((_, i) => (
+          <>
+            <Link
+              to={`/all-words/${i + 4}-letter`}
+              className='cursor-pointer text-blue-600 underline'
+            >
+              רשימת מילים באורך {i + 4} אותיות
+            </Link>
+            {i + 4 !== 11 ? <span> | </span> : <></>}
+          </>
+        ))}
       </div>
 
       <div className='mt-1 text-sm font-medium text-font'>
@@ -85,6 +42,22 @@ const Footer: React.FC = () => {
         <Link to={'/create-new-word'} className='cursor-pointer text-blue-600 underline'>
           יצירת משחק מילים
         </Link>{' '}
+      </div>
+
+      <div className='flex justify-center gap-1.5'>
+        <a
+          href='contact.html'
+          className='mt-1 cursor-pointer text-sm font-medium text-blue-600 underline'
+        >
+          צור קשר
+        </a>
+
+        <a
+          href='negishot.html'
+          className='mt-1 cursor-pointer text-sm font-medium text-blue-600 underline'
+        >
+          נגישות
+        </a>
       </div>
     </footer>
   );

@@ -25,7 +25,7 @@ const GameOverMessage: React.FC = () => {
       } else if (guesses.every((guess) => guess.length === currentWord.length + 2)) {
         setDisplay('flex');
         setBgColor('bg-red-400');
-        setMsg('נכשלת :(');
+        setMsg('לא הצלחת :(');
       }
     });
   }, [guesses, currentWord]);
