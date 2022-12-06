@@ -1,0 +1,13 @@
+{
+    "customizations": {
+      "codespaces": {
+        "repositories": {
+          "AviadSofer/*": {
+            "permissions": {
+              "permissions": "write-all"
+            }
+          }
+        }
+      }
+    }
+  }
