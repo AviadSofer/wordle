@@ -41,7 +41,7 @@ const GameOverMessage: React.FC = () => {
       className={`${display} absolute top-0 bottom-0 my-auto h-full w-full items-center justify-center`}
     >
       <div
-        className={`${bgColor} flex h-2/5 w-11/12 flex-col items-center justify-center gap-7 rounded-md shadow-2xl md:w-1/3`}
+        className={`${bgColor} flex w-11/12 flex-col items-center justify-center gap-5 rounded-md py-14 shadow-2xl md:w-1/3`}
       >
         <h1 className='text-4xl font-bold text-white'>{msg}</h1>
 

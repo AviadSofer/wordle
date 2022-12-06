@@ -66,12 +66,11 @@ const CreateWordPage: React.FC = () => {
     }
   };
 
-  const copyLink = () => {
+  const copyLink = async () => {
     if (!showErr && word !== '') {
       setIsCopy(true);
-      navigator.clipboard.writeText(
-        `${window.location.origin}/word/${encodeString(`${hint},${word}`)}`,
-      );
+      const link = `${window.location.origin}/word/${encodeString(`${hint},${word}`)}`;
+      await window.navigator.clipboard.writeText(link);
     } else {
       setShowErr(true);
     }

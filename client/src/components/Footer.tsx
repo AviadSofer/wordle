@@ -13,24 +13,24 @@ const Footer: React.FC = () => {
       <div className='mt-1 text-sm font-medium text-font'>
         <h1 className='font-semibold'> לפי אורך אותיות:</h1>
         {new Array(8).fill('').map((_, i) => (
-          <>
+          <div className='inline' key={i}>
             <Link to={`/${i + 4}-letter`} className='cursor-pointer text-blue-600 underline'>
               משחק עם {i + 4} אותיות
             </Link>
             {i + 4 !== 11 ? <span> | </span> : <></>}
-          </>
+          </div>
         ))}
       </div>
 
       <div className='mt-1 text-sm font-medium text-font'>
         <h1 className='font-semibold'>רשימת מילים:</h1>
         {new Array(8).fill('').map((_, i) => (
-          <>
+          <div className='inline' key={i}>
             <Link to={`/all-words/${i + 4}`} className='cursor-pointer text-blue-600 underline'>
               רשימת מילים באורך {i + 4} אותיות
             </Link>
             {i + 4 !== 11 ? <span> | </span> : <></>}
-          </>
+          </div>
         ))}
       </div>
 
